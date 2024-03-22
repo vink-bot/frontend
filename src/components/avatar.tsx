@@ -1,4 +1,4 @@
-import AiChatIcon from './ai-chat-icon.tsx';
+import AiChatIcon from './icons/ai-chat-icon.tsx';
 
 const Avatar = () => {
   return (

@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         yellow: 'rgb(255, 209, 50)',
+        'yellow-light': 'rgb(255, 234, 163)',
         white: 'rgb(255 255 255)',
         'blue-light': 'rgb(207 239 255)',
         'gray-light': 'rgb(231 231 232)',
