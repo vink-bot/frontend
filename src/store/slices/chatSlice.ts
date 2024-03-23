@@ -53,12 +53,9 @@ const chatSlice = createSlice({
       state.messages.push(payload.message);
     },
   },
-  selectors: {
-    selectUser: (user) => user, // Выбрать пользователя
-  },
 });
 
 export const useGetChatMessages = () => useSelector((state: IChat) => state.messages);
 export const useGetChatToken = () => useSelector((state: IChat) => state.token);
-export const { resetChat, addToken } = chatSlice.actions;
+export const { resetChat, addToken, addMessage } = chatSlice.actions;
 export const reducerChat = chatSlice.reducer;
