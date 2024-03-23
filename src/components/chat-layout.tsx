@@ -5,7 +5,6 @@ import Avatar from './avatar.tsx';
 import PopularQuestionsBox from './PopularQuestionsBox/PopularQuestionsBox.tsx';
 import Form from './form.tsx';
 import Messages from './messages.tsx';
-import { MessagesProvider } from '../context/messages-context.tsx';
 
 type ChatLayoutProps = {
   isOpen: boolean;
@@ -32,15 +31,14 @@ const ChatLayout = ({ isOpen, setIsOpen }: ChatLayoutProps) => {
         </button>
       </div>
       <PopularQuestionsBox />
-      <MessagesProvider>
-        <div className="messages flex-1 overflow-y-scroll">
-          <Messages />
-        </div>
 
-        <div className="footer">
-          <Form />
-        </div>
-      </MessagesProvider>
+      <div className="messages flex-1 overflow-y-scroll">
+        <Messages />
+      </div>
+
+      <div className="footer">
+        <Form />
+      </div>
     </div>
   );
 };

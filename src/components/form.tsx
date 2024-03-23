@@ -1,29 +1,23 @@
 import { FormEvent, useState } from 'react';
 import SendIcon from './icons/send-icon.tsx';
-import { cn } from '../libs/utils.ts';
-import { useMessages } from '../context/messages-context.tsx';
+import { cn, getDate } from '../libs/utils.ts';
+import { useChat } from '../hooks/use-chat.ts';
+import { MessageType } from '../store/slices/chatSlice.ts';
+import { v4 as uuidv4 } from 'uuid';
 
 const Form = () => {
   const [textarea, setTextarea] = useState('');
-  const { updateMessages } = useMessages();
+  const { handleAddMessage } = useChat();
 
-  const messages = [
-    {
-      id: '1536',
-      author: 'user',
-      text: textarea,
-    },
-    {
-      id: '57567',
-      author: 'bot',
-      text: 'Response from gpt',
-    },
-  ];
+  const message = {
+    id: uuidv4(),
+    type: 'USER' as MessageType,
+    date: getDate(),
+    message: textarea,
+  };
 
   const handleMessages = () => {
-    const msg = JSON.parse(localStorage.getItem('messages') ?? '[]');
-    localStorage.setItem('messages', JSON.stringify([...msg, ...messages]));
-    updateMessages();
+    handleAddMessage(message);
     setTextarea('');
   };
 
