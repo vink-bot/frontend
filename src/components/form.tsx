@@ -7,19 +7,20 @@ const Form = () => {
   const [textarea, setTextarea] = useState('');
   const { updateMessages } = useMessages();
 
+  const messages = [
+    {
+      id: '1536',
+      author: 'user',
+      text: textarea,
+    },
+    {
+      id: '57567',
+      author: 'bot',
+      text: 'Response from gpt',
+    },
+  ];
+
   const handleMessages = () => {
-    const messages = [
-      {
-        id: '1536',
-        author: 'user',
-        text: textarea,
-      },
-      {
-        id: '57567',
-        author: 'bot',
-        text: 'Response from gpt',
-      },
-    ];
     const msg = JSON.parse(localStorage.getItem('messages') ?? '[]');
     localStorage.setItem('messages', JSON.stringify([...msg, ...messages]));
     updateMessages();

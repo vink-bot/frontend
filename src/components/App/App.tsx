@@ -1,8 +1,8 @@
-import AiChatIcon from './components/icons/ai-chat-icon.tsx';
+import AiChatIcon from '../icons/ai-chat-icon.tsx';
 import { useState } from 'react';
-import ChatLayout from './components/chat-layout.tsx';
-import { cn } from './libs/utils.ts';
-import XIcon from './components/icons/x-icon.tsx';
+import ChatLayout from '../chat-layout.tsx';
+import { cn } from '../../libs/utils.ts';
+import XIcon from '../icons/x-icon.tsx';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
