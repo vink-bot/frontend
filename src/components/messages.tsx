@@ -1,13 +1,13 @@
 import { cn } from '../libs/utils.ts';
-import { useMessages } from '../context/messages-context.tsx';
+import { useGetChatMessages } from '../store/slices/chatSlice.ts';
 
 const Messages = () => {
-  const { messages } = useMessages();
+  const messages = useGetChatMessages();
 
   return (
     <div className="p-3 flex flex-col gap-2">
       {messages.map((msg) => {
-        const isMyMsg = msg.author === 'user';
+        const isMyMsg = msg.type === 'USER';
         return (
           <div
             key={msg.id}
@@ -16,7 +16,7 @@ const Messages = () => {
               isMyMsg && 'bg-blue-light self-end'
             )}
           >
-            {msg.text}
+            {msg.message}
           </div>
         );
       })}
