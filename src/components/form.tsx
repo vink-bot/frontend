@@ -1,23 +1,14 @@
 import { FormEvent, useState } from 'react';
 import SendIcon from './icons/send-icon.tsx';
-import { cn, getDate } from '../libs/utils.ts';
+import { cn } from '../libs/utils.ts';
 import { useChat } from '../hooks/use-chat.ts';
-import { MessageType } from '../store/slices/chatSlice.ts';
-import { v4 as uuidv4 } from 'uuid';
 
 const Form = () => {
   const [textarea, setTextarea] = useState('');
   const { handleAddMessage } = useChat();
 
-  const message = {
-    id: uuidv4(),
-    type: 'USER' as MessageType,
-    date: getDate(),
-    message: textarea,
-  };
-
   const handleMessages = () => {
-    handleAddMessage(message);
+    handleAddMessage({ message: textarea, type: 'USER' });
     setTextarea('');
   };
 

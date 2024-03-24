@@ -1,8 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
+import { useChat } from '../../hooks/use-chat';
 
 interface IQuestion {
+  id: number;
   name: string;
-  link: string;
+  answer?: string;
 }
 
 interface ICategory {
@@ -16,62 +18,29 @@ const PopularQuestionsCategoryMock: ICategory[] = [
     id: 1,
     name: 'Заказы',
     questions: [
-      {
-        name: 'Вопрос 1',
-        link: '#1',
-      },
-      {
-        name: 'Вопрос 2',
-        link: '#2',
-      },
-      {
-        name: 'Вопрос 3',
-        link: '#2',
-      },
-      {
-        name: 'Вопрос 4',
-        link: '#2',
-      },
-      {
-        name: 'Вопрос 5',
-        link: '#2',
-      },
-      {
-        name: 'Вопрос 6',
-        link: '#2',
-      },
-      {
-        name: 'Вопрос 7',
-        link: '#2',
-      },
+      { id: 101, name: 'Вопрос 1' },
+      { id: 102, name: 'Вопрос 2' },
+      { id: 103, name: 'Вопрос 3' },
+      { id: 104, name: 'Вопрос 4' },
+      { id: 105, name: 'Вопрос 5' },
+      { id: 106, name: 'Вопрос 6' },
+      { id: 107, name: 'Вопрос 7' },
     ],
   },
   {
     id: 2,
     name: 'Доставка',
     questions: [
-      {
-        name: 'Вопрос 1',
-        link: '#3',
-      },
-      {
-        name: 'Вопрос 2',
-        link: '#4',
-      },
+      { id: 201, name: 'Вопрос 1' },
+      { id: 202, name: 'Вопрос 2' },
     ],
   },
   {
     id: 3,
     name: 'Оплата',
     questions: [
-      {
-        name: 'Вопрос 1',
-        link: '#5',
-      },
-      {
-        name: 'Вопрос 2',
-        link: '#6',
-      },
+      { id: 301, name: 'Вопрос 1' },
+      { id: 302, name: 'Вопрос 2' },
     ],
   },
 ];
@@ -84,15 +53,44 @@ const PopularQuestionsCategoryMock: ICategory[] = [
  */
 const PopularQuestionsBox: FC = () => {
   const [activeTab, setActiveTab] = useState<string | undefined>();
+  const { handleAddMessage } = useChat();
 
   useEffect(() => {
     const defaultTab = `tab_${PopularQuestionsCategoryMock[0].id}`;
     setActiveTab(defaultTab);
   }, [PopularQuestionsCategoryMock]);
 
+  /**
+   * Событие при нажатии на ТАБ
+   * @param event
+   */
   const clickTab = (event: React.MouseEvent<HTMLLIElement>) => {
     const targetTab = event.currentTarget.dataset.name;
     setActiveTab(targetTab);
+  };
+
+  /**
+   * Событие при нажатии на вопрос,
+   * Вопрос передается в чат через хранилище Redux
+   * @param event
+   */
+  const clickQuestion = (event: React.MouseEvent<HTMLSpanElement>) => {
+    const questionId = event.currentTarget.dataset.questionId;
+    const categoryId = event.currentTarget.dataset.categoryId;
+
+    if (questionId && categoryId) {
+      const selectedCategory = PopularQuestionsCategoryMock.find(
+        (category) => category.id.toString() === categoryId
+      );
+      if (selectedCategory) {
+        const selectedQuestion = selectedCategory.questions.find(
+          (question) => question.id === parseInt(questionId)
+        );
+        if (selectedQuestion) {
+          handleAddMessage({ message: selectedQuestion.name, type: 'AI' });
+        }
+      }
+    }
   };
 
   return (
@@ -103,6 +101,7 @@ const PopularQuestionsBox: FC = () => {
             <li
               key={category.id}
               data-name={`tab_${category.id}`}
+              data-id={category.id}
               className={`pl-2 leading-1 h-full  border-r cursor-pointer flex columns items-center justify-between whitespace-nowrap hover:font-semibold 
               ${activeTab === `tab_${category.id}` ? 'font-semibold border-r-0 border-t border-b first:border-b first:border-t-0 last:border-b-0 bg-gray-light' : ''}`}
               onClick={clickTab}
@@ -138,13 +137,16 @@ const PopularQuestionsBox: FC = () => {
             className={`${activeTab !== `tab_${category.id}` && 'hidden'}`}
           >
             {category.questions.map((question, index) => (
-              <a
-                className="relative block leading-[16px] align-middle text-xs hover:font-semibold ml-2 my-1  pl-[15px] after:block after:top-1/2 after:left-0 after:translate-y-[-50%] after:absolute after:w-[10px] after:h-[10px] after:bg-green-300"
+              <span
+                className="cursor-pointer relative block leading-[16px] align-middle text-xs hover:font-semibold ml-2 my-1  pl-[15px] after:block after:top-1/2 after:left-0 after:translate-y-[-50%] after:absolute after:w-[10px] after:h-[10px] after:bg-green-300"
+                data-question-index={index}
+                data-question-id={question.id}
+                data-category-id={category.id}
                 key={index}
-                href={question.link}
+                onClick={clickQuestion}
               >
                 {question.name}
-              </a>
+              </span>
             ))}
           </div>
         ))}
