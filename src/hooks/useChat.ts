@@ -1,10 +1,10 @@
 import { useAppDispatch } from '../store';
-import { addMessage, addToken, IMessage, MessageType } from '../store/slices/chatSlice.ts';
+import { addMessage, IMessage, MessageType } from '../store/slices/chatSlice.ts';
 import { v4 as uuidv4 } from 'uuid';
 import { getDate } from '../libs/utils.ts';
 
 interface Chat {
-  handleAddMessage: (params: { message: string; type: MessageType }) => void;
+  addMessage: (params: { message: string; type: MessageType }) => void;
 }
 
 export const useChat = (): Chat => {
@@ -17,11 +17,10 @@ export const useChat = (): Chat => {
       date: getDate(),
       message: message,
     };
-    dispatch(addToken(uuidv4()));
     dispatch(addMessage(localMessage));
   };
 
   return {
-    handleAddMessage,
+    addMessage: handleAddMessage,
   };
 };

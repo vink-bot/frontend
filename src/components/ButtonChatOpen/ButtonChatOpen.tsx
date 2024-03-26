@@ -12,7 +12,6 @@ const ButtonChatOpen = () => {
   };
   return (
     <button
-      //onClick={() => setIsOpen(!isOpen)}
       onClick={() => handleClickButton()}
       type="button"
       className={cn(

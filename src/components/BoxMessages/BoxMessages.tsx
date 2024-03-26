@@ -3,7 +3,7 @@ import { IMessage, useGetChatMessages } from '../../store/slices/chatSlice.ts';
 import { useEffect, useRef, useCallback } from 'react';
 import usePopup from '../../hooks/usePopup.ts';
 
-const Messages = () => {
+const BoxMessages = () => {
   const messages: IMessage[] = useGetChatMessages();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { isOpen } = usePopup('chatPopup');
@@ -43,4 +43,4 @@ const Messages = () => {
   );
 };
 
-export default Messages;
+export default BoxMessages;

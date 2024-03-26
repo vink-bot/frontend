@@ -5,10 +5,10 @@ import { useChat } from '../../hooks/useChat.ts';
 
 const Form = () => {
   const [textarea, setTextarea] = useState('');
-  const { handleAddMessage } = useChat();
+  const { addMessage } = useChat();
 
   const handleMessages = () => {
-    handleAddMessage({ message: textarea, type: 'USER' });
+    addMessage({ message: textarea, type: 'USER' });
     setTextarea('');
   };
 
@@ -18,7 +18,7 @@ const Form = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey && textarea) {
       handleMessages();
     }
   };

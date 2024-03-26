@@ -3,6 +3,7 @@ import { addDays, getDate } from '../../libs/utils';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import store from '../index.ts';
+
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -33,10 +34,10 @@ const initialState: IChat = {
   dateExpire: addDays(getDate(), 10),
   messages: [
     {
-      id: '',
-      type: '',
-      date: '',
-      message: '',
+      id: uuidv4(),
+      type: 'AI',
+      date: getDate(),
+      message: 'Привет, чем я могу помочь?',
     },
   ],
   isFetched: false,

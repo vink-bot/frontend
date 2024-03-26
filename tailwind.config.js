@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        yellow: 'rgb(255, 209, 50)',
-        'yellow-light': 'rgb(255, 234, 163)',
-        white: 'rgb(255 255 255)',
-        'blue-light': 'rgb(207 239 255)',
-        'gray-light': 'rgb(231 231 232)',
-        'gray-dark': 'rgb(97 99 114)',
-        black: 'rgb(0 0 0)',
+        yellow: '#ffd132',
+        'yellow-light': '#ffeaa3',
+        white: '#ffffff',
+        'blue-light': '#cfefff',
+        'gray-light': '#e7e7e8',
+        'gray-dark': '#616372',
+        black: '#000000',
       },
     },
   },
