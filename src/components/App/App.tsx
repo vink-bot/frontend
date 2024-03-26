@@ -1,5 +1,5 @@
 import Layout from '../Layout/Layout';
-import ButtonChatOpen from '../ButtonChat/ButtonChatOpen';
+import ButtonChatOpen from '../ButtonChatOpen/ButtonChatOpen';
 import Header from '../Header/Header';
 import PopularQuestionsBox from '../PopularQuestionsBox/PopularQuestionsBox';
 import Messages from '../Messages/Messages';
