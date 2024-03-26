@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
-import SendIcon from './icons/send-icon.tsx';
-import { cn } from '../libs/utils.ts';
-import { useChat } from '../hooks/use-chat.ts';
+import SendIcon from '../icons/send-icon.tsx';
+import { cn } from '../../libs/utils.ts';
+import { useChat } from '../../hooks/useChat.ts';
 
 const Form = () => {
   const [textarea, setTextarea] = useState('');

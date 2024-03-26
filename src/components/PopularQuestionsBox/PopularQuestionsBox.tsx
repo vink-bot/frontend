@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useChat } from '../../hooks/use-chat';
+import { useChat } from '../../hooks/useChat.ts';
 
 interface IQuestion {
   id: number;
@@ -87,7 +87,7 @@ const PopularQuestionsBox: FC = () => {
           (question) => question.id === parseInt(questionId)
         );
         if (selectedQuestion) {
-          handleAddMessage({ message: selectedQuestion.name, type: 'AI' });
+          handleAddMessage({ message: selectedQuestion.name, type: 'USER' });
         }
       }
     }
