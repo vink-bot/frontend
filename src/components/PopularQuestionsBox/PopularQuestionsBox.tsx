@@ -53,7 +53,7 @@ const PopularQuestionsCategoryMock: ICategory[] = [
  */
 const PopularQuestionsBox: FC = () => {
   const [activeTab, setActiveTab] = useState<string | undefined>();
-  const { handleAddMessage } = useChat();
+  const { addMessage } = useChat();
 
   useEffect(() => {
     const defaultTab = `tab_${PopularQuestionsCategoryMock[0].id}`;
@@ -87,7 +87,7 @@ const PopularQuestionsBox: FC = () => {
           (question) => question.id === parseInt(questionId)
         );
         if (selectedQuestion) {
-          handleAddMessage({ message: selectedQuestion.name, type: 'USER' });
+          addMessage({ message: selectedQuestion.name, type: 'USER' });
         }
       }
     }

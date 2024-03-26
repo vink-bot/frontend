@@ -2,7 +2,7 @@ import Layout from '../Layout/Layout';
 import ButtonChatOpen from '../ButtonChatOpen/ButtonChatOpen';
 import Header from '../Header/Header';
 import PopularQuestionsBox from '../PopularQuestionsBox/PopularQuestionsBox';
-import Messages from '../Messages/Messages';
+import BoxMessages from '../BoxMessages/BoxMessages.tsx';
 import Footer from '../Footer/Footer';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Layout>
         <Header />
         <PopularQuestionsBox />
-        <Messages />
+        <BoxMessages />
         <Footer />
       </Layout>
       <ButtonChatOpen />
