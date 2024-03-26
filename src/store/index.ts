@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
 import {
   FLUSH,
@@ -12,9 +12,11 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import { reducerChat } from './slices/chatSlice';
+import { reducerPopup } from './slices/popupSlice';
 
 const rootReducer = combineReducers({
   chat: reducerChat,
+  popup: reducerPopup,
 });
 
 const persistConfig = {
@@ -36,9 +38,7 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
 
+export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export default store;

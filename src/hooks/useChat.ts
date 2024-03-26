@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../store';
-import { addMessage, IMessage, MessageType } from '../store/slices/chatSlice.ts';
+import { addMessage, addToken, IMessage, MessageType } from '../store/slices/chatSlice.ts';
 import { v4 as uuidv4 } from 'uuid';
 import { getDate } from '../libs/utils.ts';
 
@@ -17,6 +17,7 @@ export const useChat = (): Chat => {
       date: getDate(),
       message: message,
     };
+    dispatch(addToken(uuidv4()));
     dispatch(addMessage(localMessage));
   };
 
