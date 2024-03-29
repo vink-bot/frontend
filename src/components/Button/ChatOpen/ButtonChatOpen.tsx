@@ -1,7 +1,7 @@
-import { cn } from '../../libs/utils.ts';
-import XIcon from '../icons/x-icon.tsx';
-import AiChatIcon from '../icons/ai-chat-icon.tsx';
-import usePopup from '../../hooks/usePopup.ts';
+import { cn } from '../../../libs/utils.ts';
+import XIcon from '../../icons/x-icon.tsx';
+import AiChatIcon from '../../icons/ai-chat-icon.tsx';
+import usePopup from '../../../hooks/usePopup.ts';
 
 const ButtonChatOpen = () => {
   const { isOpen, openPopup, closePopup } = usePopup('chatPopup');
@@ -10,6 +10,7 @@ const ButtonChatOpen = () => {
     if (isOpen) closePopup();
     else openPopup();
   };
+
   return (
     <button
       onClick={() => handleClickButton()}

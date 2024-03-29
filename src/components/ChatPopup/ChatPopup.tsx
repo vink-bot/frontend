@@ -7,7 +7,7 @@ type ChatLayoutProps = {
   //setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const Layout = ({ children }: ChatLayoutProps) => {
+const ChatPopup = ({ children }: ChatLayoutProps) => {
   const { isOpen } = usePopup('chatPopup');
   return (
     <div
@@ -21,4 +21,4 @@ const Layout = ({ children }: ChatLayoutProps) => {
   );
 };
 
-export default Layout;
+export default ChatPopup;

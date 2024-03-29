@@ -1,5 +1,5 @@
 import Avatar from '../Avatar/Avatar.tsx';
-import ButtonChatClose from '../ButtonChatClose/ButtonChatClose.tsx';
+import ButtonChatClose from '../Button/ChatClose/ButtonChatClose.tsx';
 
 const Header = () => {
   return (

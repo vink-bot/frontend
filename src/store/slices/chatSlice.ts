@@ -12,7 +12,11 @@ export type MessageType = 'AI' | 'USER' | 'OPERATOR';
 export interface IMessage {
   id: string;
   type: MessageType | string;
-  date: string;
+  date: {
+    fullDate: string;
+    yearMonthDay: string;
+    hoursMinutes: string;
+  };
   message: string;
 }
 
@@ -29,10 +33,22 @@ export interface IChat {
 
 const initialState: IChat = {
   token: uuidv4(),
-  dateCreate: getDate(),
-  dateUpdate: getDate(),
-  dateExpire: addDays(getDate(), 10),
+  dateCreate: getDate().fullDate,
+  dateUpdate: getDate().fullDate,
+  dateExpire: addDays(getDate().fullDate, 10).fullDate,
   messages: [
+    {
+      id: uuidv4(),
+      type: 'AI',
+      date: getDate(),
+      message: 'Привет, чем я могу помочь?',
+    },
+    {
+      id: uuidv4(),
+      type: 'AI',
+      date: getDate(),
+      message: 'Привет, чем я могу помочь?',
+    },
     {
       id: uuidv4(),
       type: 'AI',
@@ -55,8 +71,8 @@ const chatSlice = createSlice({
       state.token = payload.token;
     },
     addMessage: (state, { payload }) => {
-      state.dateUpdate = getDate();
-      state.dateExpire = addDays(state.dateUpdate, 10);
+      state.dateUpdate = getDate().fullDate;
+      state.dateExpire = addDays(state.dateUpdate, 10).fullDate;
       state.messages.push(payload);
     },
   },

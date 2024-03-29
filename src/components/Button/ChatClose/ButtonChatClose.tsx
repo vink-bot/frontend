@@ -1,5 +1,5 @@
-import XIcon from '../icons/x-icon.tsx';
-import usePopup from '../../hooks/usePopup.ts';
+import XIcon from '../../icons/x-icon.tsx';
+import usePopup from '../../../hooks/usePopup.ts';
 
 const MyComponent = () => {
   const { closePopup: closeChatPopup } = usePopup('chatPopup');

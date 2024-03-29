@@ -1,21 +1,19 @@
-import Layout from '../Layout/Layout';
-import ButtonChatOpen from '../ButtonChatOpen/ButtonChatOpen';
+import ChatPopup from '../ChatPopup/ChatPopup.tsx';
+import ButtonChatOpen from '../Button/ChatOpen/ButtonChatOpen';
 import Header from '../Header/Header';
 import PopularQuestionsBox from '../PopularQuestionsBox/PopularQuestionsBox';
-import BoxMessages from '../BoxMessages/BoxMessages.tsx';
+import MessagesBox from '../MessagesBox/MessagesBox.tsx';
 import Footer from '../Footer/Footer';
 
 function App() {
-  //const [isOpen, setIsOpen] = useState(false);
-
   return (
     <main className="h-screen relative">
-      <Layout>
+      <ChatPopup>
         <Header />
         <PopularQuestionsBox />
-        <BoxMessages />
+        <MessagesBox />
         <Footer />
-      </Layout>
+      </ChatPopup>
       <ButtonChatOpen />
     </main>
   );
