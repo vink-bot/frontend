@@ -6,7 +6,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:prettier/recommended",
+
     "prettier"
   ],
 
@@ -14,7 +14,7 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
   rules: {
-    "max-len": ["warn", { code: 180, ignoreComments: true }],
+    "max-len": [1, { code: 120 }],
     quotes: ["error", "single"],
     "react-refresh/only-export-components": [
       "warn",
