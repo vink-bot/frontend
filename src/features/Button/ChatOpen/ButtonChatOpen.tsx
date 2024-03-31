@@ -1,32 +1,37 @@
-import { cn } from '../../../shared/utils/utils.ts';
-
-import usePopup from '../../../shared/hooks/usePopup.ts';
+import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
+import usePopup from '../../../shared/lib/hooks/usePopup.ts';
+import { cn } from '../../../shared/lib/utils/utils.ts';
 import CloseIcon from '../../../shared/images/icons/close.svg';
 import ChatBotIcon from '../../../shared/images/icons/chatbot.svg';
 
+/**
+ * Кнопка открытия чата
+ *
+ * @constructor
+ */
 const ButtonChatOpen = () => {
-  const { isOpen, openPopup, closePopup } = usePopup('chatPopup');
+  const { isOpen, onOpenPopup, onClosePopup } = usePopup('chatPopup');
 
   const handleClickButton = () => {
-    if (isOpen) closePopup();
-    else openPopup();
+    if (isOpen) onClosePopup();
+    else onOpenPopup();
   };
 
   return (
-    <button
-      onClick={() => handleClickButton()}
-      type="button"
-      className={cn(
-        'fixed bottom-12 right-8 rounded-full p-6 w-6 h-6 flex items-center justify-center bg-yellow hover:opacity-70 transition-all duration-300 md:opacity-100 md:visible',
+    <AppButton
+      size="m"
+      buttonClassName={cn(
+        'fixed bottom-12 right-8 md:opacity-100 md:visible',
         isOpen && 'opacity-0 invisible'
       )}
+      onClick={handleClickButton}
     >
       {isOpen ? (
-        <img className="min-w-6 h-6" src={CloseIcon} alt="close" />
+        <img className="min-w-6 h-6" src={CloseIcon} alt="Close" />
       ) : (
         <img className="min-w-6 h-6" src={ChatBotIcon} alt="ChatBot" />
       )}
-    </button>
+    </AppButton>
   );
 };
 

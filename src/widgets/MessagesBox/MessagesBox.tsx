@@ -3,8 +3,8 @@ import {
   IMessage,
   useGetChatMessages,
 } from '../../app/store/slices/chatSlice.ts';
-import { cn } from '../../shared/utils/utils.ts';
-import usePopup from '../../shared/hooks/usePopup.ts';
+import { cn } from '../../shared/lib/utils/utils.ts';
+import usePopup from '../../shared/lib/hooks/usePopup.ts';
 
 const MessagesBox = () => {
   const messages: IMessage[] = useGetChatMessages();
@@ -15,8 +15,6 @@ const MessagesBox = () => {
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({
       behavior: 'smooth',
-      block: 'nearest',
-      inline: 'nearest',
     });
   }, [messages]);
 

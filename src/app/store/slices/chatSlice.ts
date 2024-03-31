@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addDays, getDate } from '../../../shared/utils/utils.ts';
+import { addDays, getDate } from '../../../shared/lib/utils/utils.ts';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import store from '../index.ts';

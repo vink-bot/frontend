@@ -2,8 +2,8 @@ import { useDispatch } from 'react-redux';
 import {
   openPopup,
   useGetOpenPopup,
-} from '../../app/store/slices/popupSlice.ts';
-import type { PopupType } from '../../app/store/slices/popupSlice.ts';
+} from '../../../app/store/slices/popupSlice.ts';
+import type { PopupType } from '../../../app/store/slices/popupSlice.ts';
 
 const usePopup = (popupType: PopupType) => {
   const dispatch = useDispatch();
@@ -19,8 +19,8 @@ const usePopup = (popupType: PopupType) => {
 
   return {
     isOpen,
-    openPopup: handleOpenPopup,
-    closePopup: handleClosePopup,
+    onOpenPopup: handleOpenPopup,
+    onClosePopup: handleClosePopup,
   };
 };
 

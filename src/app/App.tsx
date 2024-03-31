@@ -1,4 +1,4 @@
-import ChatPopup from '../widgets/ChatPopup/ChatPopup.tsx';
+import ChatPopup from '../pages/ChatPopup/ChatPopup.tsx';
 import ButtonChatOpen from '../features/Button/ChatOpen/ButtonChatOpen.tsx';
 import '../app/styles/index.css';
 

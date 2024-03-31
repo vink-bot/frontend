@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { useChat } from '../../shared/hooks/useChat.ts';
+import { useChat } from '../../shared/lib/hooks/useChat.ts';
 import ChevronRightIcon from '../../shared/images/icons/chevron-right.svg';
 
 interface IQuestion {

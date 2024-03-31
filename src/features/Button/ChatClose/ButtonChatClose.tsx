@@ -1,16 +1,22 @@
-import usePopup from '../../../shared/hooks/usePopup.ts';
+import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
+import usePopup from '../../../shared/lib/hooks/usePopup.ts';
 import CloseIcon from '../../../shared/images/icons/close.svg';
 
+/**
+ * Кнопка закрытия чата
+ *
+ * @constructor
+ */
 const ButtonChatClose = () => {
-  const { closePopup: closeChatPopup } = usePopup('chatPopup');
+  const { onClosePopup: closeChatPopup } = usePopup('chatPopup');
   return (
-    <button
-      onClick={() => closeChatPopup()}
+    <AppButton
       type="button"
-      className="transition-all duration-300 hover:opacity-50"
+      typeButtonColor="transparent"
+      onClick={closeChatPopup}
     >
       <img className="w-6 h-6" src={CloseIcon} alt="close" />
-    </button>
+    </AppButton>
   );
 };
 

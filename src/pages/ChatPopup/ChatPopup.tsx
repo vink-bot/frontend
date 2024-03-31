@@ -1,9 +1,9 @@
-import { cn } from '../../shared/utils/utils.ts';
-import usePopup from '../../shared/hooks/usePopup.ts';
-import Header from '../Header/Header.tsx';
-import PopularQuestionsBox from '../PopularQuestionsBox/PopularQuestionsBox.tsx';
-import MessagesBox from '../MessagesBox/MessagesBox.tsx';
-import Footer from '../Footer/Footer.tsx';
+import { cn } from '../../shared/lib/utils/utils.ts';
+import usePopup from '../../shared/lib/hooks/usePopup.ts';
+import Header from '../../widgets/Header/Header.tsx';
+import PopularQuestionsBox from '../../widgets/PopularQuestionsBox/PopularQuestionsBox.tsx';
+import MessagesBox from '../../widgets/MessagesBox/MessagesBox.tsx';
+import Footer from '../../widgets/Footer/Footer.tsx';
 
 const ChatPopup = () => {
   const { isOpen } = usePopup('chatPopup');

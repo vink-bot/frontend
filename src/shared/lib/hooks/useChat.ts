@@ -1,9 +1,9 @@
-import { useAppDispatch } from '../../app/store';
+import { useAppDispatch } from '../../../app/store';
 import {
   addMessage,
   IMessage,
   MessageType,
-} from '../../app/store/slices/chatSlice.ts';
+} from '../../../app/store/slices/chatSlice.ts';
 import { v4 as uuidv4 } from 'uuid';
 import { getDate } from '../utils/utils.ts';
 

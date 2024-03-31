@@ -1,40 +1,63 @@
 import { FormEvent, useState } from 'react';
-import { useChat } from '../../shared/hooks/useChat.ts';
+import { useChat } from '../../shared/lib/hooks/useChat.ts';
 import ButtonSendMessage from '../../features/Button/SendMessage/ButtonSendMessage.tsx';
+import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea.tsx';
 
-const Form = () => {
-  const [textarea, setTextarea] = useState('');
-  const { addMessage } = useChat();
+/**
+ * Компонент формы для отправки сообщений в чат.
+ *
+ * @returns JSX элемент формы для отправки сообщений.
+ */
+const Form: React.FC = () => {
+  const [message, setMessage] = useState(''); // Состояние для хранения введенного сообщения
+  const { addMessage } = useChat(); // Хук для добавления сообщения в чат
 
-  const handleMessages = () => {
-    if (textarea.trim() !== '') {
-      addMessage({ message: textarea, type: 'USER' });
-      setTextarea('');
+  /**
+   * Обработчик события отправки формы.
+   * Вызывает функцию для отправки сообщения в чат.
+   *
+   * @param e - Событие отправки формы.
+   */
+  const handleMessageSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    sendMessage();
+  };
+
+  /**
+   * Обработчик события нажатия клавиши в текстовом поле.
+   * Если нажата клавиша Enter и текстовое поле не пустое, вызывает функцию для отправки сообщения.
+   *
+   * @param e - Событие нажатия клавиши.
+   */
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey && message.trim() !== '') {
+      e.preventDefault();
+      sendMessage();
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleMessages();
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey && textarea.trim() !== '') {
-      handleMessages();
+  /**
+   * Функция для отправки сообщения в чат.
+   * Если сообщение не пустое, добавляет его в чат и очищает текстовое поле.
+   */
+  const sendMessage = () => {
+    if (message.trim() !== '') {
+      addMessage({ message, type: 'USER' }); // Добавляет сообщение в чат
+      setMessage(''); // Очищает текстовое поле
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border-t">
+    <form onSubmit={handleMessageSubmit} className="border-t">
       <div className="relative flex justify-between items-start px-4 py-2 gap-x-2">
-        <textarea
-          autoFocus={true}
-          value={textarea}
-          onChange={(e) => setTextarea(e.target.value)}
+        {/* Компонент текстового поля для ввода сообщения */}
+        <AppTextArea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="w-full min-h-10  outline-none resize-none"
         />
-        <ButtonSendMessage visible={textarea.trim() !== ''} />
+        {/* Кнопка отправки сообщения */}
+        <ButtonSendMessage visible={message.trim() !== ''} />
       </div>
     </form>
   );
