@@ -5,10 +5,12 @@ interface IAppButton {
   children?: ReactNode;
   type?: 'button' | 'reset' | 'submit';
   onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  classNameButton?: string;
   size?: 's' | 'm';
-  buttonClassName?: string;
-  typeButton?: 'rounded' | 'default';
-  typeButtonColor?: 'yellow' | 'transparent';
+  border?: 'rounded' | 'default';
+  color?: 'yellow' | 'transparent';
 }
 
 /**
@@ -17,25 +19,29 @@ interface IAppButton {
  * @param children - Дочерние элементы кнопки, например, текст или иконка.
  * @param type - Тип кнопки (button, reset, submit).
  * @param onClick - Функция обратного вызова, вызываемая при клике на кнопку.
+ * @param onMouseEnter - Функция обратного вызова, вызываемая при наведении на кнопку.
+ * @param onMouseLeave - Функция обратного вызова, вызываемая при уходе курсора с кнопки.
+ * @param classNameButton - Дополнительный класс для кнопки.
  * @param size - Размер кнопки.
- * @param buttonClassName - Дополнительный класс для кнопки.
- * @param typeButton - Тип кнопки.
- * @param typeButtonColor - Цвет кнопки.
+ * @param border - Тип кнопки.
+ * @param color - Цвет кнопки.
  */
 const AppButton: React.FC<IAppButton> = ({
   children,
   type = 'button',
   onClick,
+  onMouseEnter,
+  onMouseLeave,
   size = 's',
-  buttonClassName,
-  typeButton = 'rounded',
-  typeButtonColor = 'yellow',
+  classNameButton,
+  border = 'rounded',
+  color = 'yellow',
 }) => {
   /**
    * Общий класс для стилизации кнопок.
    */
   const generalClass =
-    'flex items-center justify-center shrink-0 transition-all hover:opacity-70 duration-100';
+    'relative flex items-center justify-center shrink-0 transition-all hover:opacity-70 duration-100';
 
   /**
    * Размеры кнопок.
@@ -48,37 +54,49 @@ const AppButton: React.FC<IAppButton> = ({
   /**
    * Типы кнопок.
    */
-  const typeButtonList = {
-    default: '',
+  const borderList = {
+    default: 'border-none',
     rounded: 'rounded-full',
   };
 
   /**
    * Цвета для кнопок.
    */
-  const typeButtonColorList = {
+  const colorList = {
     yellow: 'bg-yellow',
     transparent: 'transparent',
   };
 
   /**
-   * Обработчик клика, вызывает переданную функцию onClick.
+   * Обработчик клика.
    */
-  const handlerClick = () => {
-    if (typeof onClick === 'function') onClick();
-  };
+  const handlerClick = () => typeof onClick === 'function' && onClick();
+
+  /**
+   * Обработчик события наведения на кнопку.
+   */
+  const handlerMouseEnter = () =>
+    typeof onMouseEnter === 'function' && onMouseEnter();
+
+  /**
+   * Обработчик события наведения на кнопку.
+   */
+  const handlerMouseLeave = () =>
+    typeof onMouseLeave === 'function' && onMouseLeave();
 
   return (
     <button
       className={cn(
         generalClass,
         sizeList[size],
-        typeButtonList[typeButton],
-        typeButtonColorList[typeButtonColor],
-        buttonClassName
+        borderList[border],
+        colorList[color],
+        classNameButton
       )}
       type={type}
       onClick={handlerClick}
+      onMouseEnter={handlerMouseEnter}
+      onMouseLeave={handlerMouseLeave}
     >
       {children}
     </button>

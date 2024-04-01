@@ -23,7 +23,7 @@ export const useChat = (): Chat => {
   }) => {
     const localMessage: IMessage = {
       id: uuidv4(),
-      type: type, // Указываю здесь статический тип, но вы можете передавать динамический тип при вызове функции
+      type: type,
       date: getDate(),
       message: message,
     };

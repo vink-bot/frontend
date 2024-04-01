@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "es2015",
     "useDefineForClassFields": true,
-    "lib": [
-      "es2015",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["es2015", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
@@ -22,13 +18,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
   "references": [
     {
       "path": "./tsconfig.node.json"

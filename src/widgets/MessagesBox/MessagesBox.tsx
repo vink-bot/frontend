@@ -30,12 +30,6 @@ const MessagesBox = () => {
           return (
             <div
               ref={messageCurrentRef}
-              // onMouseEnter={(event) => {
-              //   console.log(event);
-              // }}
-              // onMouseOut={(event) => {
-              //   console.log(event);
-              // }}
               key={msg.id}
               className={cn(
                 'flex gap-2 items-center w-full',

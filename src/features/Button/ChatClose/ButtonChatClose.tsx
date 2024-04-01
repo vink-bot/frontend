@@ -1,5 +1,6 @@
-import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
 import usePopup from '../../../shared/lib/hooks/usePopup.ts';
+import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
+
 import CloseIcon from '../../../shared/images/icons/close.svg';
 
 /**
@@ -10,11 +11,7 @@ import CloseIcon from '../../../shared/images/icons/close.svg';
 const ButtonChatClose = () => {
   const { onClosePopup: closeChatPopup } = usePopup('chatPopup');
   return (
-    <AppButton
-      type="button"
-      typeButtonColor="transparent"
-      onClick={closeChatPopup}
-    >
+    <AppButton type="button" color="transparent" onClick={closeChatPopup}>
       <img className="w-6 h-6" src={CloseIcon} alt="close" />
     </AppButton>
   );

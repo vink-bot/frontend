@@ -1,5 +1,5 @@
-import { cn } from '../../shared/lib/utils/utils.ts';
 import usePopup from '../../shared/lib/hooks/usePopup.ts';
+import { cn } from '../../shared/lib/utils/utils.ts';
 import Header from '../../widgets/Header/Header.tsx';
 import PopularQuestionsBox from '../../widgets/PopularQuestionsBox/PopularQuestionsBox.tsx';
 import MessagesBox from '../../widgets/MessagesBox/MessagesBox.tsx';
