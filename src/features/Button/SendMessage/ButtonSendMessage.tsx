@@ -1,6 +1,7 @@
 import { cn } from '../../../shared/lib/utils/utils.ts';
-import SendIcon from '../../../shared/images/icons/send.svg';
 import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
+
+import SendIcon from '../../../shared/images/icons/send.svg';
 
 interface IButtonSendMessageProps {
   visible: boolean;
@@ -15,7 +16,7 @@ const ButtonSendMessage = ({ visible }: IButtonSendMessageProps) => {
   return (
     <AppButton
       type="submit"
-      buttonClassName={cn(
+      classNameButton={cn(
         'invisible opacity-0 scale-0',
         visible && 'visible opacity-100 scale-100'
       )}

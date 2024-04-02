@@ -1,16 +1,16 @@
-import { FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useChat } from '../../shared/lib/hooks/useChat.ts';
-import ButtonSendMessage from '../../features/Button/SendMessage/ButtonSendMessage.tsx';
 import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea.tsx';
+import ButtonSendMessage from '../../features/Button/SendMessage/ButtonSendMessage.tsx';
 
 /**
  * Компонент формы для отправки сообщений в чат.
  *
  * @returns JSX элемент формы для отправки сообщений.
  */
-const Form: React.FC = () => {
-  const [message, setMessage] = useState(''); // Состояние для хранения введенного сообщения
-  const { addMessage } = useChat(); // Хук для добавления сообщения в чат
+const MessageInputForm: React.FC = () => {
+  const [message, setMessage] = useState('');
+  const { addMessage } = useChat();
 
   /**
    * Обработчик события отправки формы.
@@ -42,25 +42,24 @@ const Form: React.FC = () => {
    */
   const sendMessage = () => {
     if (message.trim() !== '') {
-      addMessage({ message, type: 'USER' }); // Добавляет сообщение в чат
-      setMessage(''); // Очищает текстовое поле
+      addMessage({ message, type: 'USER' });
+      setMessage('');
     }
   };
 
   return (
-    <form onSubmit={handleMessageSubmit} className="border-t">
-      <div className="relative flex justify-between items-start px-4 py-2 gap-x-2">
-        {/* Компонент текстового поля для ввода сообщения */}
-        <AppTextArea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-        {/* Кнопка отправки сообщения */}
-        <ButtonSendMessage visible={message.trim() !== ''} />
-      </div>
+    <form
+      onSubmit={handleMessageSubmit}
+      className="border-t relative flex justify-between items-center px-4 py-2 gap-x-2"
+    >
+      <AppTextArea
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
+      <ButtonSendMessage visible={message.trim() !== ''} />
     </form>
   );
 };
 
-export default Form;
+export default MessageInputForm;

@@ -20,6 +20,7 @@ const AppTextArea: React.FC<TextAreaProps> = ({
 }) => {
   return (
     <textarea
+      placeholder="Введите сообщение"
       autoFocus={true}
       value={value}
       onChange={onChange}

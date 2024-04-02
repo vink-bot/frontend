@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useChat } from '../../shared/lib/hooks/useChat.ts';
-import ChevronRightIcon from '../../shared/images/icons/chevron-right.svg';
+import TabCategory from '../../entities/Tabs/TabCategory/TabCategory.tsx';
+import TabItem from '../../entities/Tabs/TabItem/TabItem.tsx';
 
 interface IQuestion {
   id: number;
@@ -74,37 +75,21 @@ const PopularQuestionsBox: FC = () => {
   };
 
   return (
-    <div className="border-b-2 flex justify-between h-[116px]">
-      <div className="whitespace-nowrap w-[160px]">
-        <ul className="flex flex-col place-content-around h-full">
-          {PopularQuestionsCategoryMock.map((category) => (
-            <li
-              key={category.id}
-              className={`pl-2 leading-1 h-full border-r cursor-pointer flex columns items-center justify-between whitespace-nowrap hover:font-semibold ${
-                activeTab === category.id
-                  ? 'font-semibold border-r-0 border-t border-b first:border-b first:border-t-0 last:border-b-0 bg-gray-lightest'
-                  : ''
-              }`}
-              onClick={() => clickTab(category.id)}
-            >
-              {category.name}
-              {activeTab === category.id && (
-                <img
-                  className="w-[15px] h-[15px] text-#be3041"
-                  src={ChevronRightIcon}
-                  alt="Chevron Right"
-                />
-              )}
-            </li>
-          ))}
-        </ul>
+    <div className="border-b flex justify-between h-[116px]">
+      <div className="whitespace-nowrap w-[160px] flex flex-col place-content-around ">
+        {PopularQuestionsCategoryMock.map((category) => (
+          <TabCategory
+            key={category.id}
+            activeTabId={activeTab}
+            id={category.id}
+            name={category.name}
+            clickTab={clickTab}
+          />
+        ))}
       </div>
       <div className="w-full overflow-y-auto bg-gray-lightest">
         {PopularQuestionsCategoryMock.map((category) => (
-          <div
-            key={category.id}
-            className={activeTab !== category.id ? 'hidden' : ''}
-          >
+          <TabItem key={category.id} id={category.id} activeTabId={activeTab}>
             {category.questions.map((question) => (
               <span
                 className="cursor-pointer relative block leading-[16px] align-middle text-xs hover:font-semibold ml-2 my-1 pl-[15px] after:block after:top-1/2 after:left-0 after:translate-y-[-50%] after:absolute after:w-[10px] after:h-[10px] after:bg-green-300"
@@ -114,7 +99,7 @@ const PopularQuestionsBox: FC = () => {
                 {question.name}
               </span>
             ))}
-          </div>
+          </TabItem>
         ))}
       </div>
     </div>

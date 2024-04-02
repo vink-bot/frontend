@@ -1,6 +1,6 @@
-import { cn } from '../../shared/lib/utils/utils.ts';
 import usePopup from '../../shared/lib/hooks/usePopup.ts';
-import Header from '../../widgets/Header/Header.tsx';
+import { cn } from '../../shared/lib/utils/utils.ts';
+import WindowTitle from '../../widgets/WindowTitle/WindowTitle.tsx';
 import PopularQuestionsBox from '../../widgets/PopularQuestionsBox/PopularQuestionsBox.tsx';
 import MessagesBox from '../../widgets/MessagesBox/MessagesBox.tsx';
 import Footer from '../../widgets/Footer/Footer.tsx';
@@ -14,7 +14,7 @@ const ChatPopup = () => {
         isOpen && 'flex visible opacity-100 right-8'
       )}
     >
-      <Header />
+      <WindowTitle />
       <PopularQuestionsBox />
       <MessagesBox />
       <Footer />

@@ -1,7 +1,7 @@
-import Form from '../Form/Form.tsx';
+import MessageInputForm from '../MessageInputForm/MessageInputForm';
 
 const Footer = () => {
-  return <Form />;
+  return <MessageInputForm />;
 };
 
 export default Footer;

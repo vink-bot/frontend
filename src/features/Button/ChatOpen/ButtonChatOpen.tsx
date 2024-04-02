@@ -1,6 +1,8 @@
-import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
-import usePopup from '../../../shared/lib/hooks/usePopup.ts';
-import { cn } from '../../../shared/lib/utils/utils.ts';
+import { cn } from '../../../shared/lib/utils/utils';
+import usePopup from '../../../shared/lib/hooks/usePopup';
+import AppButton from '../../../shared/ui/AppButton/AppButton';
+import PulsatingCircle from '../../../shared/ui/PulsatingCircle/PulsatingCircle';
+
 import CloseIcon from '../../../shared/images/icons/close.svg';
 import ChatBotIcon from '../../../shared/images/icons/chatbot.svg';
 
@@ -20,8 +22,8 @@ const ButtonChatOpen = () => {
   return (
     <AppButton
       size="m"
-      buttonClassName={cn(
-        'fixed bottom-12 right-8 md:opacity-100 md:visible',
+      classNameButton={cn(
+        'fixed bottom-12 right-8 md:opacity-100 md:visible ',
         isOpen && 'opacity-0 invisible'
       )}
       onClick={handleClickButton}
@@ -29,7 +31,10 @@ const ButtonChatOpen = () => {
       {isOpen ? (
         <img className="min-w-6 h-6" src={CloseIcon} alt="Close" />
       ) : (
-        <img className="min-w-6 h-6" src={ChatBotIcon} alt="ChatBot" />
+        <>
+          <PulsatingCircle />
+          <img className="min-w-6 h-6" src={ChatBotIcon} alt="ChatBot" />
+        </>
       )}
     </AppButton>
   );
