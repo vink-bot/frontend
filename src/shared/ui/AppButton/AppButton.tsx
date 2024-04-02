@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { cn } from '../../lib/utils/utils.ts';
 
-interface IAppButton {
+interface IAppButtonProps {
   children?: ReactNode;
   type?: 'button' | 'reset' | 'submit';
   onClick?: () => void;
@@ -9,7 +9,7 @@ interface IAppButton {
   onMouseLeave?: () => void;
   classNameButton?: string;
   size?: 's' | 'm';
-  border?: 'rounded' | 'default';
+  border?: 'rounded' | 'border-none';
   color?: 'yellow' | 'transparent';
 }
 
@@ -26,7 +26,7 @@ interface IAppButton {
  * @param border - Тип кнопки.
  * @param color - Цвет кнопки.
  */
-const AppButton: React.FC<IAppButton> = ({
+const AppButton: React.FC<IAppButtonProps> = ({
   children,
   type = 'button',
   onClick,
@@ -55,7 +55,7 @@ const AppButton: React.FC<IAppButton> = ({
    * Типы кнопок.
    */
   const borderList = {
-    default: 'border-none',
+    'border-none': 'border-none',
     rounded: 'rounded-full',
   };
 

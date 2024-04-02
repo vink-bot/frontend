@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useChat } from '../../shared/lib/hooks/useChat.ts';
 import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea.tsx';
 import ButtonSendMessage from '../../features/Button/SendMessage/ButtonSendMessage.tsx';

@@ -11,7 +11,12 @@ import CloseIcon from '../../../shared/images/icons/close.svg';
 const ButtonChatClose = () => {
   const { onClosePopup: closeChatPopup } = usePopup('chatPopup');
   return (
-    <AppButton type="button" color="transparent" onClick={closeChatPopup}>
+    <AppButton
+      border="border-none"
+      type="button"
+      color="transparent"
+      onClick={closeChatPopup}
+    >
       <img className="w-6 h-6" src={CloseIcon} alt="close" />
     </AppButton>
   );
