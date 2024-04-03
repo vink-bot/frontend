@@ -8,6 +8,13 @@ interface IAppTabCategoryProps {
   clickTab: (id: number) => void;
 }
 
+/**
+ * Компонент отображает вкладку категории в панели вопросов.
+ * @param id Идентификатор категории.
+ * @param name Название категории.
+ * @param activeTabId Идентификатор текущей активной вкладки.
+ * @param clickTab Функция обработки клика по вкладке категории.
+ */
 const TabCategory: React.FC<IAppTabCategoryProps> = ({
   id,
   name,

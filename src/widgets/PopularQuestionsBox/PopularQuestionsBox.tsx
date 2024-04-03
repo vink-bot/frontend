@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useChat } from '../../shared/lib/hooks/useChat.ts';
 import TabCategory from '../../entities/Tabs/TabCategory/TabCategory.tsx';
 import TabItem from '../../entities/Tabs/TabItem/TabItem.tsx';
+import AppQuestionLink from '../../shared/ui/AppQuestionLink/AppQuestionLink.tsx';
 
 interface IQuestion {
   id: number;
@@ -14,6 +15,7 @@ interface ICategory {
   questions: IQuestion[];
 }
 
+// Моковые данные о категориях и вопросах
 const PopularQuestionsCategoryMock: ICategory[] = [
   {
     id: 1,
@@ -46,20 +48,28 @@ const PopularQuestionsCategoryMock: ICategory[] = [
   },
 ];
 
+/**
+ * Блок с популярными вопросами пользователей
+ *
+ * @constructor
+ */
 const PopularQuestionsBox: FC = () => {
   const [activeTab, setActiveTab] = useState<number>(
     PopularQuestionsCategoryMock[0]?.id || 0
   );
   const { addMessage } = useChat();
 
+  // Устанавливаем активную вкладку при монтировании компонента
   useEffect(() => {
     setActiveTab(PopularQuestionsCategoryMock[0]?.id || 0);
   }, []);
 
+  // Обработчик клика по вкладке категории
   const clickTab = (categoryId: number) => {
     setActiveTab(categoryId);
   };
 
+  // Обработчик клика по вопросу
   const clickQuestion = (questionId: number, categoryId: number) => {
     const selectedCategory = PopularQuestionsCategoryMock.find(
       (category) => category.id === categoryId
@@ -91,13 +101,13 @@ const PopularQuestionsBox: FC = () => {
         {PopularQuestionsCategoryMock.map((category) => (
           <TabItem key={category.id} id={category.id} activeTabId={activeTab}>
             {category.questions.map((question) => (
-              <span
-                className="cursor-pointer relative block leading-[16px] align-middle text-xs hover:font-semibold ml-2 my-1 pl-[15px] after:block after:top-1/2 after:left-0 after:translate-y-[-50%] after:absolute after:w-[10px] after:h-[10px] after:bg-green-300"
+              <AppQuestionLink
                 key={question.id}
-                onClick={() => clickQuestion(question.id, category.id)}
-              >
-                {question.name}
-              </span>
+                questionId={question.id}
+                clickQuestion={clickQuestion}
+                questionName={question.name}
+                categoryId={category.id}
+              />
             ))}
           </TabItem>
         ))}
