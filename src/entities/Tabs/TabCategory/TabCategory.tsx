@@ -15,7 +15,7 @@ interface IAppTabCategoryProps {
  * @param activeTabId Идентификатор текущей активной вкладки.
  * @param clickTab Функция обработки клика по вкладке категории.
  */
-const TabCategory: React.FC<IAppTabCategoryProps> = ({
+const MemoizedTabCategory: React.FC<IAppTabCategoryProps> = ({
   id,
   name,
   activeTabId,
@@ -43,4 +43,5 @@ const TabCategory: React.FC<IAppTabCategoryProps> = ({
   );
 };
 
+const TabCategory = React.memo(MemoizedTabCategory);
 export default TabCategory;

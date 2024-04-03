@@ -41,4 +41,4 @@ export const useGetOpenPopup = () =>
 // Экспорт действий
 export const { openPopup } = popupSlice.actions;
 // Экспорт редьюсера
-export const reducerPopup = popupSlice.reducer;
+export default popupSlice.reducer;

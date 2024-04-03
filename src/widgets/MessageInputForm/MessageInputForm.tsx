@@ -1,7 +1,8 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, FocusEvent, useState } from 'react';
 import { useChat } from '../../shared/lib/hooks/useChat.ts';
 import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea.tsx';
 import ButtonSendMessage from '../../features/Button/SendMessage/ButtonSendMessage.tsx';
+import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
 
 /**
  * Компонент формы для отправки сообщений в чат.
@@ -11,6 +12,18 @@ import ButtonSendMessage from '../../features/Button/SendMessage/ButtonSendMessa
 const MessageInputForm: React.FC = () => {
   const [message, setMessage] = useState('');
   const { addMessage } = useChat();
+  const { changeFocus } = useChatConfig();
+
+  /**
+   * Функция для отправки сообщения в чат.
+   * Если сообщение не пустое, добавляет его в чат и очищает текстовое поле.
+   */
+  const sendMessage = () => {
+    if (message.trim() !== '') {
+      addMessage({ message, type: 'USER' });
+      setMessage('');
+    }
+  };
 
   /**
    * Обработчик события отправки формы.
@@ -36,15 +49,9 @@ const MessageInputForm: React.FC = () => {
     }
   };
 
-  /**
-   * Функция для отправки сообщения в чат.
-   * Если сообщение не пустое, добавляет его в чат и очищает текстовое поле.
-   */
-  const sendMessage = () => {
-    if (message.trim() !== '') {
-      addMessage({ message, type: 'USER' });
-      setMessage('');
-    }
+  const handleFocus = (e: FocusEvent) => {
+    e.preventDefault();
+    changeFocus(true);
   };
 
   return (
@@ -56,6 +63,7 @@ const MessageInputForm: React.FC = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
       />
       <ButtonSendMessage visible={message.trim() !== ''} />
     </form>

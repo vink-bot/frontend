@@ -1,14 +1,13 @@
 import { useEffect, useRef, useCallback } from 'react';
-import {
-  IMessage,
-  useGetChatMessages,
-} from '../../app/store/slices/chatSlice.ts';
+import { IMessage } from '../../app/store/slices/chatSlice.ts';
 import usePopup from '../../shared/lib/hooks/usePopup.ts';
 import AppMessage from '../../shared/ui/AppMessage/AppMessage.tsx';
+import { useChat } from '../../shared/lib/hooks/useChat.ts';
 
 const MessagesBox = () => {
-  const messages: IMessage[] = useGetChatMessages();
+  const { getMessages: messages } = useChat();
   const { isOpen } = usePopup('chatPopup');
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = useCallback(() => {

@@ -7,7 +7,7 @@ interface IQuestionLinkProps {
   clickQuestion: (questionId: number, categoryId: number) => void;
 }
 
-const AppQuestionLink: React.FC<IQuestionLinkProps> = ({
+const MemoizedAppQuestionLink: React.FC<IQuestionLinkProps> = ({
   questionName,
   questionId,
   categoryId,
@@ -28,4 +28,5 @@ const AppQuestionLink: React.FC<IQuestionLinkProps> = ({
   );
 };
 
+const AppQuestionLink = React.memo(MemoizedAppQuestionLink);
 export default AppQuestionLink;

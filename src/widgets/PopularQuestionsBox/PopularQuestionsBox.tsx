@@ -1,52 +1,11 @@
 import { FC, useEffect, useState } from 'react';
 import { useChat } from '../../shared/lib/hooks/useChat.ts';
-import TabCategory from '../../entities/Tabs/TabCategory/TabCategory.tsx';
-import TabItem from '../../entities/Tabs/TabItem/TabItem.tsx';
-import AppQuestionLink from '../../shared/ui/AppQuestionLink/AppQuestionLink.tsx';
-
-interface IQuestion {
-  id: number;
-  name: string;
-}
-
-interface ICategory {
-  id: number;
-  name: string;
-  questions: IQuestion[];
-}
-
-// Моковые данные о категориях и вопросах
-const PopularQuestionsCategoryMock: ICategory[] = [
-  {
-    id: 1,
-    name: 'Заказы',
-    questions: [
-      { id: 101, name: 'Вопрос 1' },
-      { id: 102, name: 'Вопрос 2' },
-      { id: 103, name: 'Вопрос 3' },
-      { id: 104, name: 'Вопрос 4' },
-      { id: 105, name: 'Вопрос 5' },
-      { id: 106, name: 'Вопрос 6' },
-      { id: 107, name: 'Вопрос 7' },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Доставка',
-    questions: [
-      { id: 201, name: 'Вопрос 1' },
-      { id: 202, name: 'Вопрос 2' },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Оплата',
-    questions: [
-      { id: 301, name: 'Вопрос 1' },
-      { id: 302, name: 'Вопрос 2' },
-    ],
-  },
-];
+import { TabCategory, TabItem } from '../../entities/Tabs';
+import AppQuestionLink from '../../shared/ui/AppQuestionLink/AppQuestionLink';
+import { cn } from '../../shared/lib/utils/utils.ts';
+import { PopularQuestionsCategoryMock } from './mock';
+import useChatConfig from '../../shared/lib/hooks/useChatConfig';
+import ButtonPopularQuestionsToggle from '../../features/Button/PopularQuestionsToggle/ButtonPopularQuestionsToggle.tsx';
 
 /**
  * Блок с популярными вопросами пользователей
@@ -58,6 +17,8 @@ const PopularQuestionsBox: FC = () => {
     PopularQuestionsCategoryMock[0]?.id || 0
   );
   const { addMessage } = useChat();
+  const { chatConfig } = useChatConfig();
+  const { inputFocus } = chatConfig;
 
   // Устанавливаем активную вкладку при монтировании компонента
   useEffect(() => {
@@ -85,32 +46,41 @@ const PopularQuestionsBox: FC = () => {
   };
 
   return (
-    <div className="border-b flex justify-between h-[116px]">
-      <div className="whitespace-nowrap w-[160px] flex flex-col place-content-around ">
-        {PopularQuestionsCategoryMock.map((category) => (
-          <TabCategory
-            key={category.id}
-            activeTabId={activeTab}
-            id={category.id}
-            name={category.name}
-            clickTab={clickTab}
-          />
-        ))}
-      </div>
-      <div className="w-full overflow-y-auto bg-gray-lightest">
-        {PopularQuestionsCategoryMock.map((category) => (
-          <TabItem key={category.id} id={category.id} activeTabId={activeTab}>
-            {category.questions.map((question) => (
-              <AppQuestionLink
-                key={question.id}
-                questionId={question.id}
-                clickQuestion={clickQuestion}
-                questionName={question.name}
-                categoryId={category.id}
-              />
-            ))}
-          </TabItem>
-        ))}
+    <div
+      className={cn(
+        'border-b max-h-28 h-full overflow-y-hidden animate-heightFadeIn',
+        inputFocus && 'animate-heightFadeOut invisible'
+      )}
+    >
+      {inputFocus && <ButtonPopularQuestionsToggle />}
+
+      <div className={'flex justify-between h-full'}>
+        <div className="whitespace-nowrap h-full w-[160px] flex flex-col  ">
+          {PopularQuestionsCategoryMock.map((category) => (
+            <TabCategory
+              key={category.id}
+              activeTabId={activeTab}
+              id={category.id}
+              name={category.name}
+              clickTab={clickTab}
+            />
+          ))}
+        </div>
+        <div className="w-full overflow-y-auto bg-gray-lightest">
+          {PopularQuestionsCategoryMock.map((category) => (
+            <TabItem key={category.id} id={category.id} activeTabId={activeTab}>
+              {category.questions.map((question) => (
+                <AppQuestionLink
+                  key={question.id}
+                  questionId={question.id}
+                  clickQuestion={clickQuestion}
+                  questionName={question.name}
+                  categoryId={category.id}
+                />
+              ))}
+            </TabItem>
+          ))}
+        </div>
       </div>
     </div>
   );
