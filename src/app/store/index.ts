@@ -11,11 +11,16 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-import { reducerChat } from './slices/chatSlice.ts';
-import { reducerPopup } from './slices/popupSlice.ts';
+
+export type AppDispatch = typeof store.dispatch;
+
+import reducerChat from './slices/chatSlice.ts';
+import reducerChatConfig from './slices/chatConfigSlice.ts';
+import reducerPopup from './slices/popupSlice.ts';
 
 const rootReducer = combineReducers({
   chat: reducerChat,
+  chatConfig: reducerChatConfig,
   popup: reducerPopup,
 });
 
@@ -38,7 +43,5 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export default store;

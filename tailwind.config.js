@@ -50,18 +50,29 @@ export default {
     extend: {
       colors: colors,
       keyframes: {
-        heightHide: {
-          '0%': { height: 0, opacity: 0 },
-          '50%': { height: '50%' },
-          '100%': { height: '100%', opacity: 100 },
+        heightFadeOut: {
+          '0%': { visibility: 'hidden' },
+          '100%': { height: '40px' },
         },
-        fadeInWord: {
+        heightFadeIn: {
+          '0%': { height: '40px' },
+          '50%': { height: '50%' },
+          '100%': { height: '100%', visibility: 'show' },
+        },
+        fadeInMessage: {
           from: { opacity: 0, transform: 'translateY(-10px)' },
           to: { opacity: 1, transform: 'translateY(0)' },
         },
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
       },
       animation: {
-        fadeInWord: 'fadeInWord 0.5s ease forwards',
+        fadeIn: 'fadeIn 1.5s ease forwards',
+        fadeInMessage: 'fadeInMessage 0.5s ease forwards',
+        heightFadeOut: 'heightFadeOut 0.2s linear forwards',
+        heightFadeIn: 'heightFadeIn 0.2s linear forwards',
       },
     },
   },

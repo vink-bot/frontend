@@ -1,5 +1,5 @@
 import Title from '../../entities/Title/Title.tsx';
-import ButtonChatClose from '../../features/Button/ChatClose/ButtonChatClose.tsx';
+import ButtonChatClose from '../../features/Buttons/ChatClose/ButtonChatClose.tsx';
 
 const WindowTitle = () => {
   return (

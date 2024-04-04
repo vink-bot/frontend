@@ -6,7 +6,6 @@ import store from '../index.ts';
 
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
 export type MessageType = 'AI' | 'USER' | 'OPERATOR';
 
 export interface IMessage {
@@ -55,9 +54,10 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     resetChat: () => initialState, // Возвращаем начальное состояние
-    addToken: (state, { payload }) => {
+    setToken: (state, { payload }) => {
       state.token = payload.token;
     },
+
     addMessage: (state, { payload }) => {
       state.dateUpdate = getDate().fullDate;
       state.dateExpire = addDays(state.dateUpdate, 10).fullDate;
@@ -68,8 +68,9 @@ const chatSlice = createSlice({
 //Экспорт селекторов
 export const useGetChatMessages = () =>
   useAppSelector((state) => state.chat.messages);
-export const useGetChatToken = () => useSelector((state: IChat) => state.token);
+export const useGetChatToken = () =>
+  useAppSelector((state) => state.chat.token);
 // Экспорт действий
-export const { resetChat, addToken, addMessage } = chatSlice.actions;
+export const { resetChat, setToken, addMessage } = chatSlice.actions;
 // Экспорт редьюсера
-export const reducerChat = chatSlice.reducer;
+export default chatSlice.reducer;

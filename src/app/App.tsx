@@ -1,5 +1,5 @@
 import ChatPopup from '../pages/ChatPopup/ChatPopup.tsx';
-import ButtonChatOpen from '../features/Button/ChatOpen/ButtonChatOpen.tsx';
+import ButtonChatOpen from '../features/Buttons/ChatOpen/ButtonChatOpen.tsx';
 import '../app/styles/index.css';
 
 function App() {

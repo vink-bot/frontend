@@ -8,7 +8,14 @@ interface IAppTabCategoryProps {
   clickTab: (id: number) => void;
 }
 
-const TabCategory: React.FC<IAppTabCategoryProps> = ({
+/**
+ * Компонент отображает вкладку категории в панели вопросов.
+ * @param id Идентификатор категории.
+ * @param name Название категории.
+ * @param activeTabId Идентификатор текущей активной вкладки.
+ * @param clickTab Функция обработки клика по вкладке категории.
+ */
+const MemoizedTabCategory: React.FC<IAppTabCategoryProps> = ({
   id,
   name,
   activeTabId,
@@ -36,4 +43,5 @@ const TabCategory: React.FC<IAppTabCategoryProps> = ({
   );
 };
 
+const TabCategory = React.memo(MemoizedTabCategory);
 export default TabCategory;
