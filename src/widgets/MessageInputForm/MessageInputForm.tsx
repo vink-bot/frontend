@@ -1,7 +1,7 @@
 import React, { FormEvent, FocusEvent, useState } from 'react';
 import { useChat } from '../../shared/lib/hooks/useChat.ts';
 import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea.tsx';
-import ButtonSendMessage from '../../features/Button/SendMessage/ButtonSendMessage.tsx';
+import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage.tsx';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
 
 /**

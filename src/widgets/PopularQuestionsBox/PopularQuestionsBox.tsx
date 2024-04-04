@@ -5,7 +5,7 @@ import AppQuestionLink from '../../shared/ui/AppQuestionLink/AppQuestionLink';
 import { cn } from '../../shared/lib/utils/utils.ts';
 import { PopularQuestionsCategoryMock } from './mock';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig';
-import ButtonPopularQuestionsToggle from '../../features/Button/PopularQuestionsToggle/ButtonPopularQuestionsToggle.tsx';
+import ButtonPopularQuestionsToggle from '../../features/Buttons/PopularQuestionsToggle/ButtonPopularQuestionsToggle.tsx';
 
 /**
  * Блок с популярными вопросами пользователей
