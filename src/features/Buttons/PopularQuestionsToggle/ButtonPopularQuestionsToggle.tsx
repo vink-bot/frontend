@@ -3,9 +3,9 @@ import React from 'react';
 import useChatConfig from '../../../shared/lib/hooks/useChatConfig.ts';
 
 const ButtonPopularQuestionsToggle: React.FC = () => {
-  const { changeFocus } = useChatConfig();
+  const { onSetFocus } = useChatConfig();
   const handleClick = () => {
-    changeFocus(false);
+    onSetFocus(false);
   };
   return (
     <AppButton

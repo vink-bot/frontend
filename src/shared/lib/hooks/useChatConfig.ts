@@ -11,9 +11,15 @@ const useChatConfig = () => {
   const handleChangeFocus = (isFocus: boolean) => {
     dispatch(setConfig({ inputFocus: isFocus }));
   };
+
+  const handlePoolingMessage = ({ isPooling }: { isPooling: boolean }) => {
+    dispatch(setConfig({ poolingMessage: isPooling }));
+  };
+
   return {
     chatConfig,
-    changeFocus: handleChangeFocus,
+    onSetFocus: handleChangeFocus,
+    onSetPoolingMessage: handlePoolingMessage,
   };
 };
 

@@ -1,21 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addDays, getDate } from '../../../shared/lib/utils/utils.ts';
+import { getDate } from '../../../shared/lib/utils/utils.ts';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import store from '../index.ts';
 
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-export type MessageType = 'AI' | 'USER' | 'OPERATOR';
 
-export interface IMessage {
+export type MessageType = 'GPT' | 'USER' | 'OPERATOR';
+
+export interface IDateCreateMessage {
+  fullDate: string;
+  yearMonthDay: string;
+  hoursMinutes: string;
+}
+
+export interface IMessageRedux {
   id: string;
-  type: MessageType | string;
-  date: {
-    fullDate: string;
-    yearMonthDay: string;
-    hoursMinutes: string;
-  };
+  type: MessageType;
+  dateCreate: IDateCreateMessage;
   message: string;
 }
 
@@ -23,23 +26,24 @@ export interface IChat {
   token: string;
   dateCreate: string;
   dateUpdate: string;
-  dateExpire: string;
-  messages: IMessage[];
+  messages: IMessageRedux[];
   isFetched: boolean;
   loading: boolean;
   error: string;
 }
 
+/**
+ * Начальное состояние
+ */
 const initialState: IChat = {
   token: uuidv4(),
   dateCreate: getDate().fullDate,
   dateUpdate: getDate().fullDate,
-  dateExpire: addDays(getDate().fullDate, 10).fullDate,
   messages: [
     {
       id: uuidv4(),
-      type: 'AI',
-      date: getDate(),
+      type: 'GPT',
+      dateCreate: getDate(),
       message: 'Привет, чем я могу помочь?',
     },
   ],
@@ -60,7 +64,6 @@ const chatSlice = createSlice({
 
     addMessage: (state, { payload }) => {
       state.dateUpdate = getDate().fullDate;
-      state.dateExpire = addDays(state.dateUpdate, 10).fullDate;
       state.messages.push(payload);
     },
   },

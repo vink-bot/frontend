@@ -11,8 +11,8 @@ import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
  */
 const MessageInputForm: React.FC = () => {
   const [message, setMessage] = useState('');
-  const { addMessage } = useChat();
-  const { changeFocus } = useChatConfig();
+  const { onSetMessage } = useChat();
+  const { onSetFocus, onSetPoolingMessage } = useChatConfig();
 
   /**
    * Функция для отправки сообщения в чат.
@@ -20,7 +20,8 @@ const MessageInputForm: React.FC = () => {
    */
   const sendMessage = () => {
     if (message.trim() !== '') {
-      addMessage({ message, type: 'USER' });
+      onSetMessage({ message, type: 'USER' });
+      onSetPoolingMessage({ isPooling: true });
       setMessage('');
     }
   };
@@ -51,7 +52,7 @@ const MessageInputForm: React.FC = () => {
 
   const handleFocus = (e: FocusEvent) => {
     e.preventDefault();
-    changeFocus(true);
+    onSetFocus(true);
   };
 
   return (

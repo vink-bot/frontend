@@ -16,7 +16,7 @@ const PopularQuestionsBox: FC = () => {
   const [activeTab, setActiveTab] = useState<number>(
     PopularQuestionsCategoryMock[0]?.id || 0
   );
-  const { addMessage } = useChat();
+  const { onSetMessage } = useChat();
   const { chatConfig } = useChatConfig();
   const { inputFocus } = chatConfig;
 
@@ -40,7 +40,7 @@ const PopularQuestionsBox: FC = () => {
         (question) => question.id === questionId
       );
       if (selectedQuestion) {
-        addMessage({ message: selectedQuestion.name, type: 'USER' });
+        onSetMessage({ message: selectedQuestion.name, type: 'USER' });
       }
     }
   };

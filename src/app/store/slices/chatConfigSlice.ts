@@ -7,18 +7,20 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 interface IConfig {
   inputFocus: boolean;
+  poolingMessage: boolean;
 }
 
 const initialState: IConfig = {
   inputFocus: false,
+  poolingMessage: false,
 };
 
 const chatConfigSlice = createSlice({
   name: 'chatConfig',
   initialState,
   reducers: {
-    setConfig: (state, { payload }) => {
-      state.inputFocus = payload.inputFocus;
+    setConfig: (_state, { payload }) => {
+      return payload;
     },
   },
 });
