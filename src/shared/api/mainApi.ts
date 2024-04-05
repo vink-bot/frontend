@@ -62,6 +62,7 @@ class Api {
   getMessage(): Promise<AxiosResponse> {
     return this._request('/message', {
       method: 'get',
+      data: {},
     });
   }
 }

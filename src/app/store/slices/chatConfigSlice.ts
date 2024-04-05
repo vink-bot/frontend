@@ -19,13 +19,16 @@ const chatConfigSlice = createSlice({
   name: 'chatConfig',
   initialState,
   reducers: {
-    setConfig: (_state, { payload }) => {
-      return payload;
+    setInputFocus: (state, { payload }) => {
+      state.inputFocus = payload.inputFocus;
+    },
+    setPoolingMessage: (state, { payload }) => {
+      state.poolingMessage = payload.poolingMessage;
     },
   },
 });
 export const useGetChatConfig = () =>
   useAppSelector((state) => state.chatConfig);
 
-export const { setConfig } = chatConfigSlice.actions;
+export const { setInputFocus, setPoolingMessage } = chatConfigSlice.actions;
 export default chatConfigSlice.reducer;

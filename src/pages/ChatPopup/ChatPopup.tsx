@@ -16,8 +16,10 @@ const ChatPopup = () => {
   const { getMessages: messages, onSetMessage, getTokenChat } = useChat();
   const { poolingMessage } = chatConfig;
 
+  //Установка значения токена чата
   mainApi.setChatToken(getTokenChat);
 
+  //Сервис, который будет опрашивать сервер о новых сообщениях
   const messageService = GetMessageService;
   messageService.setHandleMessage(onSetMessage);
   messageService.setHandleStopPooling(onSetPoolingMessage);
@@ -30,7 +32,9 @@ const ChatPopup = () => {
     ) {
       onSetPoolingMessage({ isPooling: true });
       messageService.startPolling();
-      messageService.startPollingForData();
+      messageService.startPollingForData().catch(() => {
+        onSetPoolingMessage({ isPooling: false });
+      });
     } else {
       // messageService.stopPolling();
       // onSetPoolingMessage({ isPooling: false });

@@ -39,10 +39,10 @@ class GetMessageService {
           const { message, user } = response.data;
           this.handleMessage({ message, type: user }); // Обновляем состояние Redux
         } catch (error) {
-          console.error('Произошла ошибка при получении данных:', error);
           this.stopPolling();
+          console.error('Произошла ошибка при получении данных:', error);
         }
-      }, 5000); // Интервал опроса сервера (5000 мс = 5 секунд)
+      }, 3000); // Интервал опроса сервера (5000 мс = 5 секунд)
     }
   }
 
@@ -50,16 +50,17 @@ class GetMessageService {
   stopPolling(): void {
     console.log('Stop Pooling');
     this.handleStopPooling({ isPooling: false });
+    this.isPolling = false;
     if (this.pollingInterval) {
       clearInterval(this.pollingInterval);
       this.pollingInterval = null;
-      this.isPolling = false;
     }
   }
 
   // Запуск циклического опроса
   startPolling(): void {
     this.isPolling = true;
+    //this.handleStopPooling({ isPooling: true });
   }
 }
 
