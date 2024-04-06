@@ -1,8 +1,10 @@
 import React, { FormEvent, FocusEvent, useState } from 'react';
-import { useChat } from '../../shared/lib/hooks/useChat.ts';
-import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea.tsx';
-import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage.tsx';
-import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
+import { useChat } from '../../shared/lib/hooks/useChat';
+import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea';
+import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage';
+import useChatConfig from '../../shared/lib/hooks/useChatConfig';
+import { useAppDispatch } from '../../app/store';
+import { sendMessageR } from '../../app/store/slices/chatMessagesSlice.ts';
 
 /**
  * Компонент формы для отправки сообщений в чат.
@@ -10,9 +12,10 @@ import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
  * @returns JSX элемент формы для отправки сообщений.
  */
 const MessageInputForm: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [message, setMessage] = useState('');
-  const { addMessage } = useChat();
-  const { changeFocus } = useChatConfig();
+  const { onSetMessage } = useChat();
+  const { onSetFocus, onSetPoolingMessage } = useChatConfig();
 
   /**
    * Функция для отправки сообщения в чат.
@@ -20,7 +23,9 @@ const MessageInputForm: React.FC = () => {
    */
   const sendMessage = () => {
     if (message.trim() !== '') {
-      addMessage({ message, type: 'USER' });
+      dispatch(sendMessageR(message));
+      onSetMessage({ message, type: 'USER' });
+      onSetPoolingMessage({ isPooling: true });
       setMessage('');
     }
   };
@@ -51,7 +56,7 @@ const MessageInputForm: React.FC = () => {
 
   const handleFocus = (e: FocusEvent) => {
     e.preventDefault();
-    changeFocus(true);
+    onSetFocus(true);
   };
 
   return (

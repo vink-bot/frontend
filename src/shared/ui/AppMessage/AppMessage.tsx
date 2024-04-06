@@ -1,8 +1,10 @@
 import React from 'react';
-import { IMessage } from '../../../app/store/slices/chatSlice';
+import { IMessageRedux } from '../../../app/store/slices/chatSlice';
 import { cn } from '../../lib/utils/utils.ts';
 
-const MemoizedAppMessage: React.FC<{ message: IMessage }> = ({ message }) => {
+const MemoizedAppMessage: React.FC<{ message: IMessageRedux }> = ({
+  message,
+}) => {
   const isMyMsg = message.type === 'USER';
 
   return (
@@ -13,8 +15,8 @@ const MemoizedAppMessage: React.FC<{ message: IMessage }> = ({ message }) => {
         !isMyMsg && 'flex-row-reverse'
       )}
     >
-      <time className="text-xs" dateTime={message.date.fullDate}>
-        {message.date.hoursMinutes}
+      <time className="text-xs" dateTime={message.dateCreate.fullDate}>
+        {message.dateCreate.hoursMinutes}
       </time>
       <div
         className={cn(

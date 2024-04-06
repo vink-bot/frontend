@@ -1,5 +1,6 @@
 import {
-  setConfig,
+  setInputFocus,
+  setPoolingMessage,
   useGetChatConfig,
 } from '../../../app/store/slices/chatConfigSlice.ts';
 import { useAppDispatch } from '../../../app/store';
@@ -9,11 +10,17 @@ const useChatConfig = () => {
   const chatConfig = useGetChatConfig();
 
   const handleChangeFocus = (isFocus: boolean) => {
-    dispatch(setConfig({ inputFocus: isFocus }));
+    dispatch(setInputFocus({ inputFocus: isFocus }));
   };
+
+  const handlePoolingMessage = ({ isPooling }: { isPooling: boolean }) => {
+    dispatch(setPoolingMessage({ poolingMessage: isPooling }));
+  };
+
   return {
     chatConfig,
-    changeFocus: handleChangeFocus,
+    onSetFocus: handleChangeFocus,
+    onSetPoolingMessage: handlePoolingMessage,
   };
 };
 
