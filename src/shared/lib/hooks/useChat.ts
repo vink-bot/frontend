@@ -1,13 +1,13 @@
 import { useAppDispatch } from '../../../app/store';
+import { v4 as uuidv4 } from 'uuid';
+import { getDate } from '../utils/utils.ts';
 import {
   addMessage,
   IMessageRedux,
   MessageType,
   useGetChatMessages,
-  useGetChatToken,
-} from '../../../app/store/slices/chatSlice.ts';
-import { v4 as uuidv4 } from 'uuid';
-import { getDate } from '../utils/utils.ts';
+} from '../../../app/store/slices/chatMessagesSlice.ts';
+import { useGetChatToken } from '../../../app/store/slices/chatConfigSlice.ts';
 
 interface Chat {
   onSetMessage: (params: { message: string; type: MessageType }) => void;
@@ -42,6 +42,9 @@ export const useChat = (): Chat => {
       status: 'SENT',
       dateCreate: getDate(),
       message: message,
+      isFetched: false,
+      isLoading: false,
+      error: null,
     };
 
     dispatch(addMessage(localMessage));

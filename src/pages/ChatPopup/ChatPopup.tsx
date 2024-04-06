@@ -25,15 +25,12 @@ const ChatPopup = () => {
   messageService.setHandleStopPooling(onSetPoolingMessage);
 
   useEffect(() => {
-    const lastMessage = messages[messages.length - 1];
+    //const lastMessage = messages[messages.length - 1];
     console.log('poolingMessage ', poolingMessage);
-    if (
-      poolingMessage &&
-      (lastMessage.type === 'OPERATOR' || lastMessage.type === 'USER')
-    ) {
+    if (poolingMessage) {
       // onSetPoolingMessage({ isPooling: true });
-      // messageService.startPolling();
-      // messageService.startPollingForData();
+      messageService.startPolling();
+      messageService.startPollingForData();
     }
   }, [poolingMessage, messages]);
 

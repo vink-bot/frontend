@@ -14,12 +14,12 @@ import {
 
 export type AppDispatch = typeof store.dispatch;
 
-import reducerChat from './slices/chatSlice.ts';
 import reducerChatConfig from './slices/chatConfigSlice.ts';
+import reducerChatMessages from './slices/chatMessagesSlice.ts';
 import reducerPopup from './slices/popupSlice.ts';
 
 const rootReducer = combineReducers({
-  chat: reducerChat,
+  chatMessages: reducerChatMessages,
   chatConfig: reducerChatConfig,
   popup: reducerPopup,
 });
@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['chat'],
+  whitelist: ['chatConfig', 'chatMessages'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

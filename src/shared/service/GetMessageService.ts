@@ -1,6 +1,6 @@
 import mainApi from '../api/mainApi.ts';
 import { AxiosResponse } from 'axios';
-import { MessageType } from '../../app/store/slices/chatSlice.ts';
+import { MessageType } from '../../app/store/slices/chatMessagesSlice.ts';
 
 // Тип обработчика сообщений
 interface MessageHandler {
@@ -31,14 +31,33 @@ class GetMessageService {
     if (this.isPolling) {
       console.log('Start Pooling');
       this.pollingInterval = setInterval(async () => {
-        console.log(this.pollingInterval);
         try {
           const response: AxiosResponse = await mainApi.getMessage();
-          const { message, user } = response.data;
-          this.handleMessage({ message, type: user }); // Обновляем состояние Redux
+          const { messages } = response.data;
+          console.log(response.data);
+          if (messages.length > 0) {
+            messages?.map(
+              (message: {
+                message: string;
+                date_create: string;
+                user: MessageType;
+              }) => {
+                this.handleMessage({
+                  message: message.message,
+                  type: message.user,
+                });
+              }
+            );
+            const lastMessage = messages[messages.length - 1];
+            if (
+              lastMessage.type !== 'OPERATOR' ||
+              lastMessage.type !== 'USER'
+            ) {
+              this.stopPolling();
+            }
+          }
         } catch (error) {
           console.error('Произошла ошибка при получении данных SetInterval');
-          this.stopPolling();
         }
       }, 3000);
     }

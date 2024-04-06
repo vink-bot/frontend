@@ -47,11 +47,8 @@ class Api {
     return this.instance.request({ url, ...config });
   }
 
-  setToken(token: string) {
-    this._chatToken = token;
-  }
-
   sendMessage(message: string): Promise<AxiosResponse> {
+    console.log(message);
     return this._request('/gpt', {
       method: 'POST',
       data: { message },
@@ -60,7 +57,7 @@ class Api {
 
   getMessage(): Promise<AxiosResponse> {
     return this._request('/message', {
-      method: 'get',
+      method: 'GET',
       data: {},
     });
   }

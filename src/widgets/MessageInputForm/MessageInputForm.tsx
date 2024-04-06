@@ -3,8 +3,8 @@ import { useChat } from '../../shared/lib/hooks/useChat';
 import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea';
 import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig';
-import { sendMessageR } from '../../app/store/slices/chatSlice';
 import { useAppDispatch } from '../../app/store';
+import { sendMessageR } from '../../app/store/slices/chatMessagesSlice.ts';
 
 /**
  * Компонент формы для отправки сообщений в чат.
@@ -25,7 +25,7 @@ const MessageInputForm: React.FC = () => {
     if (message.trim() !== '') {
       dispatch(sendMessageR(message));
       onSetMessage({ message, type: 'USER' });
-      //onSetPoolingMessage({ isPooling: true });
+      onSetPoolingMessage({ isPooling: true });
       setMessage('');
     }
   };
