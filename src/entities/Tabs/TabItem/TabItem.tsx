@@ -12,11 +12,7 @@ interface IAppTabItemProps {
  * @param activeTabId Идентификатор текущей активной вкладки.
  * @param children Дочерние элементы компонента.
  */
-const MemoizedTabItem: React.FC<IAppTabItemProps> = ({
-  id,
-  activeTabId,
-  children,
-}) => {
+const MemoizedTabItem: React.FC<IAppTabItemProps> = ({ id, activeTabId, children }) => {
   return (
     <div key={id} className={activeTabId !== id ? 'hidden' : ''}>
       {children}

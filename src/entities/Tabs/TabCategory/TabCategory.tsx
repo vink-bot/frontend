@@ -15,30 +15,17 @@ interface IAppTabCategoryProps {
  * @param activeTabId Идентификатор текущей активной вкладки.
  * @param clickTab Функция обработки клика по вкладке категории.
  */
-const MemoizedTabCategory: React.FC<IAppTabCategoryProps> = ({
-  id,
-  name,
-  activeTabId,
-  clickTab,
-}) => {
+const MemoizedTabCategory: React.FC<IAppTabCategoryProps> = ({ id, name, activeTabId, clickTab }) => {
   return (
     <span
       key={id}
       className={`pl-2 leading-1 h-full border-r cursor-pointer flex columns items-center justify-between whitespace-nowrap hover:font-semibold ${
-        activeTabId === id
-          ? 'font-semibold border-r-0 border-t border-b first:border-b first:border-t-0 last:border-b-0 bg-gray-lightest'
-          : ''
+        activeTabId === id ? 'font-semibold border-r-0 border-t border-b first:border-b first:border-t-0 last:border-b-0 bg-gray-lightest' : ''
       }`}
       onClick={() => clickTab(id)}
     >
       {name}
-      {activeTabId === id && (
-        <img
-          className="w-[15px] h-[15px] text-#be3041"
-          src={ChevronRightIcon}
-          alt="Chevron Right"
-        />
-      )}
+      {activeTabId === id && <img className="w-[15px] h-[15px] text-#be3041" src={ChevronRightIcon} alt="Chevron Right" />}
     </span>
   );
 };

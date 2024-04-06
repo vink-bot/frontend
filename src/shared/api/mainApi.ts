@@ -33,20 +33,6 @@ class Api {
     this._chatToken = value;
   }
 
-  private _request(
-    url: string,
-    config: AxiosRequestConfig
-  ): Promise<AxiosResponse> {
-    // Добавляем токен к заголовкам запроса, если он установлен
-    if (this._chatToken) {
-      if (!config.headers) {
-        config.headers = {};
-      }
-      config.headers['chat-token'] = `${this._chatToken}`;
-    }
-    return this.instance.request({ url, ...config });
-  }
-
   sendMessage(message: string): Promise<AxiosResponse> {
     console.log(message);
     return this._request('/gpt', {
@@ -60,6 +46,17 @@ class Api {
       method: 'GET',
       data: {},
     });
+  }
+
+  private _request(url: string, config: AxiosRequestConfig): Promise<AxiosResponse> {
+    // Добавляем токен к заголовкам запроса, если он установлен
+    if (this._chatToken) {
+      if (!config.headers) {
+        config.headers = {};
+      }
+      config.headers['chat-token'] = `${this._chatToken}`;
+    }
+    return this.instance.request({ url, ...config });
   }
 }
 

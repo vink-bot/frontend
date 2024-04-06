@@ -39,10 +39,7 @@ const chatConfigSlice = createSlice({
     },
   },
 });
-export const useGetChatConfig = () =>
-  useAppSelector((state) => state.chatConfig);
-export const useGetChatToken = () =>
-  useAppSelector((state) => state.chatConfig.token);
-export const { setInputFocus, setPoolingMessage, setToken } =
-  chatConfigSlice.actions;
+export const useGetChatConfig = () => useAppSelector((state) => state.chatConfig);
+export const useGetChatToken = () => useAppSelector((state) => state.chatConfig.token);
+export const { setInputFocus, setPoolingMessage, setToken } = chatConfigSlice.actions;
 export default chatConfigSlice.reducer;

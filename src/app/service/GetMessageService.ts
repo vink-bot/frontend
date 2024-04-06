@@ -1,6 +1,6 @@
-import mainApi from '../api/mainApi.ts';
+import mainApi from '../../shared/api/mainApi.ts';
 import { AxiosResponse } from 'axios';
-import { MessageType } from '../../app/store/slices/chatMessagesSlice.ts';
+import { MessageType } from '../store/slices/chatMessagesSlice.ts';
 
 // Тип обработчика сообщений
 interface MessageHandler {
@@ -15,8 +15,7 @@ interface StopPoolingHandler {
 class GetMessageService {
   private pollingInterval: NodeJS.Timeout | null = null;
   private isPolling: boolean = false;
-  private handleMessage: MessageHandler = () => {};
-  private handleStopPooling: StopPoolingHandler = () => {};
+  private errorCount: number = 0;
 
   setHandleMessage = (handleMessage: MessageHandler): void => {
     this.handleMessage = handleMessage;
@@ -36,28 +35,27 @@ class GetMessageService {
           const { messages } = response.data;
           console.log(response.data);
           if (messages.length > 0) {
-            messages?.map(
-              (message: {
-                message: string;
-                date_create: string;
-                user: MessageType;
-              }) => {
-                this.handleMessage({
-                  message: message.message,
-                  type: message.user,
-                });
-              }
-            );
+            messages?.map((message: { message: string; date_create: string; user: MessageType }) => {
+              this.handleMessage({
+                message: message.message,
+                type: message.user,
+              });
+            });
             const lastMessage = messages[messages.length - 1];
-            if (
-              lastMessage.type !== 'OPERATOR' ||
-              lastMessage.type !== 'USER'
-            ) {
+            if (lastMessage.type !== 'OPERATOR' || lastMessage.type !== 'USER') {
+              this.stopPolling();
+            } else if (this.errorCount > 5) {
+              console.error('Произошла ошибка при получении данных GetMessageService 2');
+              this.handleMessage({
+                message: 'Произошла ошибка при получении данных GetMessageService 2',
+                type: 'ERROR',
+              });
               this.stopPolling();
             }
           }
         } catch (error) {
-          console.error('Произошла ошибка при получении данных SetInterval');
+          this.errorCount += 1;
+          console.error('Произошла ошибка при получении данных GetMessageService 1');
         }
       }, 3000);
     }
@@ -75,6 +73,10 @@ class GetMessageService {
   startPolling = (): void => {
     this.isPolling = true;
   };
+
+  private handleMessage: MessageHandler = () => {};
+
+  private handleStopPooling: StopPoolingHandler = () => {};
 }
 
 const getMessageService = new GetMessageService();

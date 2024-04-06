@@ -15,23 +15,8 @@ interface TextAreaProps {
  * @param onKeyDown - Функция обратного вызова, вызываемая при нажатии клавиши в текстовом поле.
  * @param onFocus - Функция обратного вызова, вызываемая при фокусе элемента.
  */
-const AppTextArea: React.FC<TextAreaProps> = ({
-  value,
-  onChange,
-  onKeyDown,
-  onFocus,
-}) => {
-  return (
-    <textarea
-      placeholder="Введите сообщение"
-      autoFocus={true}
-      value={value}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-      onFocus={onFocus}
-      className="w-full min-h-10 outline-none resize-none"
-    />
-  );
+const AppTextArea: React.FC<TextAreaProps> = ({ value, onChange, onKeyDown, onFocus }) => {
+  return <textarea placeholder="Введите сообщение" autoFocus={true} value={value} onChange={onChange} onKeyDown={onKeyDown} onFocus={onFocus} className="w-full min-h-10 outline-none resize-none" />;
 };
 
 export default AppTextArea;

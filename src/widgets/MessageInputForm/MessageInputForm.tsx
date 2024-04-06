@@ -60,16 +60,8 @@ const MessageInputForm: React.FC = () => {
   };
 
   return (
-    <form
-      onSubmit={handleMessageSubmit}
-      className="border-t relative flex justify-between items-center px-4 py-2 gap-x-2"
-    >
-      <AppTextArea
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={handleKeyDown}
-        onFocus={handleFocus}
-      />
+    <form onSubmit={handleMessageSubmit} className="border-t relative flex justify-between items-center px-4 py-2 gap-x-2">
+      <AppTextArea value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={handleKeyDown} onFocus={handleFocus} />
       <ButtonSendMessage visible={message.trim() !== ''} />
     </form>
   );

@@ -26,22 +26,11 @@ interface IAppButtonProps {
  * @param border - Тип кнопки.
  * @param color - Цвет кнопки.
  */
-const AppButton: React.FC<IAppButtonProps> = ({
-  children,
-  type = 'button',
-  onClick,
-  onMouseEnter,
-  onMouseLeave,
-  size = 's',
-  classNameButton,
-  border = 'rounded',
-  color = 'yellow',
-}) => {
+const AppButton: React.FC<IAppButtonProps> = ({ children, type = 'button', onClick, onMouseEnter, onMouseLeave, size = 's', classNameButton, border = 'rounded', color = 'yellow' }) => {
   /**
    * Общий класс для стилизации кнопок.
    */
-  const generalClass =
-    'relative flex items-center justify-center shrink-0 transition-all hover:opacity-70 duration-100';
+  const generalClass = 'relative flex items-center justify-center shrink-0 transition-all hover:opacity-70 duration-100';
 
   /**
    * Размеры кнопок.
@@ -76,24 +65,16 @@ const AppButton: React.FC<IAppButtonProps> = ({
   /**
    * Обработчик события наведения на кнопку.
    */
-  const handlerMouseEnter = () =>
-    typeof onMouseEnter === 'function' && onMouseEnter();
+  const handlerMouseEnter = () => typeof onMouseEnter === 'function' && onMouseEnter();
 
   /**
    * Обработчик события наведения на кнопку.
    */
-  const handlerMouseLeave = () =>
-    typeof onMouseLeave === 'function' && onMouseLeave();
+  const handlerMouseLeave = () => typeof onMouseLeave === 'function' && onMouseLeave();
 
   return (
     <button
-      className={cn(
-        generalClass,
-        sizeList[size],
-        borderList[border],
-        colorList[color],
-        classNameButton
-      )}
+      className={cn(generalClass, sizeList[size], borderList[border], colorList[color], classNameButton)}
       type={type}
       onClick={handlerClick}
       onMouseEnter={handlerMouseEnter}

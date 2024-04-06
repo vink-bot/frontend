@@ -8,15 +8,12 @@ import MainApi from '../../../shared/api/mainApi.ts';
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const sendMessageR = createAsyncThunk(
-  'send/sendMessage',
-  async (message: string) => {
-    const response = await MainApi.sendMessage(message);
-    return response.data;
-  }
-);
+export const sendMessageR = createAsyncThunk('send/sendMessage', async (message: string) => {
+  const response = await MainApi.sendMessage(message);
+  return response.data;
+});
 
-export type MessageType = 'GPT' | 'USER' | 'OPERATOR';
+export type MessageType = 'GPT' | 'USER' | 'OPERATOR' | 'ERROR';
 
 export type MessageStatus = 'SENT' | 'ERROR' | 'SUCCESS' | 'RECEIVE';
 
@@ -69,8 +66,7 @@ const chatMessagesSlice = createSlice({
   },
 });
 //Экспорт селекторов
-export const useGetChatMessages = () =>
-  useAppSelector((state) => state.chatMessages);
+export const useGetChatMessages = () => useAppSelector((state) => state.chatMessages);
 // Экспорт действий
 export const { addMessage } = chatMessagesSlice.actions;
 // Экспорт редьюсера

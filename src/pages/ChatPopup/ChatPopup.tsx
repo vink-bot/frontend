@@ -7,7 +7,7 @@ import MessagesBox from '../../widgets/MessagesBox/MessagesBox.tsx';
 import Footer from '../../widgets/Footer/Footer.tsx';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
 import { useChat } from '../../shared/lib/hooks/useChat.ts';
-import GetMessageService from '../../shared/service/GetMessageService.ts';
+import GetMessageService from '../../app/service/GetMessageService.ts';
 import mainApi from '../../shared/api/mainApi.ts';
 
 const ChatPopup = () => {

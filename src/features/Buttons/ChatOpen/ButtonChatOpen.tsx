@@ -20,14 +20,7 @@ const ButtonChatOpen = () => {
   };
 
   return (
-    <AppButton
-      size="m"
-      classNameButton={cn(
-        'fixed bottom-12 right-8 md:opacity-100 md:visible ',
-        isOpen && 'opacity-0 invisible'
-      )}
-      onClick={handleClickButton}
-    >
+    <AppButton size="m" classNameButton={cn('fixed bottom-12 right-8 md:opacity-100 md:visible ', isOpen && 'opacity-0 invisible')} onClick={handleClickButton}>
       {isOpen ? (
         <img className="min-w-6 h-6" src={CloseIcon} alt="Close" />
       ) : (

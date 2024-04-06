@@ -14,13 +14,7 @@ interface IButtonSendMessageProps {
  */
 const ButtonSendMessage = ({ visible }: IButtonSendMessageProps) => {
   return (
-    <AppButton
-      type="submit"
-      classNameButton={cn(
-        'invisible opacity-0 scale-0',
-        visible && 'visible opacity-100 scale-100'
-      )}
-    >
+    <AppButton type="submit" classNameButton={cn('invisible opacity-0 scale-0', visible && 'visible opacity-100 scale-100')}>
       <img className="w-10 h-10 p-2" src={SendIcon} alt="Send" />
     </AppButton>
   );

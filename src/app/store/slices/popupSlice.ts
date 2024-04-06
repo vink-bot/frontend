@@ -25,10 +25,7 @@ const popupSlice = createSlice({
   initialState,
   reducers: {
     // Действие для открытия или закрытия всплывающего окна
-    openPopup: (
-      state,
-      action: PayloadAction<{ popupType: PopupType; isOpen: boolean }>
-    ) => {
+    openPopup: (state, action: PayloadAction<{ popupType: PopupType; isOpen: boolean }>) => {
       const { popupType, isOpen } = action.payload;
       // Обновление состояния всплывающего окна
       state.isOpen[popupType] = isOpen;
@@ -36,8 +33,7 @@ const popupSlice = createSlice({
   },
 });
 //Экспорт селекторов
-export const useGetOpenPopup = () =>
-  useAppSelector((state) => state.popup.isOpen);
+export const useGetOpenPopup = () => useAppSelector((state) => state.popup.isOpen);
 // Экспорт действий
 export const { openPopup } = popupSlice.actions;
 // Экспорт редьюсера

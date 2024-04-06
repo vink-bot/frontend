@@ -1,8 +1,4 @@
-import {
-  setInputFocus,
-  setPoolingMessage,
-  useGetChatConfig,
-} from '../../../app/store/slices/chatConfigSlice.ts';
+import { setInputFocus, setPoolingMessage, useGetChatConfig } from '../../../app/store/slices/chatConfigSlice.ts';
 import { useAppDispatch } from '../../../app/store';
 
 const useChatConfig = () => {
