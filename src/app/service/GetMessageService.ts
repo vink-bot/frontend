@@ -44,18 +44,19 @@ class GetMessageService {
             const lastMessage = messages[messages.length - 1];
             if (lastMessage.type !== 'OPERATOR' || lastMessage.type !== 'USER') {
               this.stopPolling();
-            } else if (this.errorCount > 5) {
-              console.error('Произошла ошибка при получении данных GetMessageService 2');
-              this.handleMessage({
-                message: 'Произошла ошибка при получении данных GetMessageService 2',
-                type: 'ERROR',
-              });
-              this.stopPolling();
             }
           }
         } catch (error) {
           this.errorCount += 1;
-          console.error('Произошла ошибка при получении данных GetMessageService 1');
+          if (this.errorCount > 5) {
+            this.stopPolling();
+            console.error('Произошла ошибка при получении данных GetMessageService 2');
+            this.handleMessage({
+              message: 'Произошла ошибка при получении данных с сервера. Попробуйте позднее.',
+              type: 'ERROR',
+            });
+          }
+          console.error('Произошла ошибка при получении данных GetMessageService 1 | ', this.errorCount);
         }
       }, 3000);
     }
