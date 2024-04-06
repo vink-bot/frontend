@@ -39,6 +39,7 @@ export const useChat = (): Chat => {
     const localMessage: IMessageRedux = {
       id: uuidv4(),
       type: type,
+      status: 'SENT',
       dateCreate: getDate(),
       message: message,
     };

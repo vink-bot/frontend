@@ -18,50 +18,44 @@ class GetMessageService {
   private handleMessage: MessageHandler = () => {};
   private handleStopPooling: StopPoolingHandler = () => {};
 
-  // Установка обработчика сообщений
-  setHandleMessage(handleMessage: MessageHandler): void {
+  setHandleMessage = (handleMessage: MessageHandler): void => {
     this.handleMessage = handleMessage;
-  }
+  };
 
-  // Установка обработчика остановки пуллинга
-  setHandleStopPooling(handleStopPooling: StopPoolingHandler): void {
+  setHandleStopPooling = (handleStopPooling: StopPoolingHandler): void => {
     this.handleStopPooling = handleStopPooling;
-  }
+  };
 
-  // Запуск циклического опроса сервера и обновления хранилища Redux
-  async startPollingForData(): Promise<void> {
+  startPollingForData = (): void => {
     console.log('Init Pooling');
     if (this.isPolling) {
       console.log('Start Pooling');
       this.pollingInterval = setInterval(async () => {
+        console.log(this.pollingInterval);
         try {
           const response: AxiosResponse = await mainApi.getMessage();
           const { message, user } = response.data;
           this.handleMessage({ message, type: user }); // Обновляем состояние Redux
         } catch (error) {
+          console.error('Произошла ошибка при получении данных SetInterval');
           this.stopPolling();
-          console.error('Произошла ошибка при получении данных:', error);
         }
-      }, 3000); // Интервал опроса сервера (5000 мс = 5 секунд)
+      }, 3000);
     }
-  }
+  };
 
-  // Остановка циклического опроса
-  stopPolling(): void {
+  stopPolling = (): void => {
     console.log('Stop Pooling');
-    this.handleStopPooling({ isPooling: false });
-    this.isPolling = false;
     if (this.pollingInterval) {
       clearInterval(this.pollingInterval);
-      this.pollingInterval = null;
+      this.isPolling = false;
+      this.handleStopPooling({ isPooling: false });
     }
-  }
+  };
 
-  // Запуск циклического опроса
-  startPolling(): void {
+  startPolling = (): void => {
     this.isPolling = true;
-    //this.handleStopPooling({ isPooling: true });
-  }
+  };
 }
 
 const getMessageService = new GetMessageService();

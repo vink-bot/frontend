@@ -1,8 +1,10 @@
 import React, { FormEvent, FocusEvent, useState } from 'react';
-import { useChat } from '../../shared/lib/hooks/useChat.ts';
-import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea.tsx';
-import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage.tsx';
-import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
+import { useChat } from '../../shared/lib/hooks/useChat';
+import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea';
+import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage';
+import useChatConfig from '../../shared/lib/hooks/useChatConfig';
+import { sendMessageR } from '../../app/store/slices/chatSlice';
+import { useAppDispatch } from '../../app/store';
 
 /**
  * Компонент формы для отправки сообщений в чат.
@@ -10,6 +12,7 @@ import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
  * @returns JSX элемент формы для отправки сообщений.
  */
 const MessageInputForm: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [message, setMessage] = useState('');
   const { onSetMessage } = useChat();
   const { onSetFocus, onSetPoolingMessage } = useChatConfig();
@@ -20,8 +23,9 @@ const MessageInputForm: React.FC = () => {
    */
   const sendMessage = () => {
     if (message.trim() !== '') {
+      dispatch(sendMessageR(message));
       onSetMessage({ message, type: 'USER' });
-      onSetPoolingMessage({ isPooling: true });
+      //onSetPoolingMessage({ isPooling: true });
       setMessage('');
     }
   };

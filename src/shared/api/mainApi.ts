@@ -39,7 +39,6 @@ class Api {
   ): Promise<AxiosResponse> {
     // Добавляем токен к заголовкам запроса, если он установлен
     if (this._chatToken) {
-      console.log(this._chatToken);
       if (!config.headers) {
         config.headers = {};
       }
@@ -53,7 +52,7 @@ class Api {
   }
 
   sendMessage(message: string): Promise<AxiosResponse> {
-    return this._request('/message', {
+    return this._request('/gpt', {
       method: 'POST',
       data: { message },
     });
