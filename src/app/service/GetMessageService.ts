@@ -31,6 +31,12 @@ class GetMessageService {
   // Переменная для хранения времени последнего сообщения
   private lastMessageTime: Date | null = null;
 
+  constructor(
+    private maxRetryAttemptsMessageFromServer: number = 3,
+    private messagePollingInterval: number = 5,
+    private timeoutChatRequest: number = 10
+  ) {}
+
   /**
    * Проверяет значение переменной pollingInterval и запускает процесс для получения данных с сервера
    */
@@ -40,8 +46,8 @@ class GetMessageService {
         this.stopPolling();
         break;
       }
-      // Ждем 3 секунды перед следующим опросом
-      await new Promise((resolve) => setTimeout(resolve, MESSAGE_POLLING_INTERVAL * 1000));
+      // Ждем N секунд перед следующим опросом
+      await new Promise((resolve) => setTimeout(resolve, this.messagePollingInterval * 1000));
       try {
         const response: AxiosResponse = await mainApi.getMessage();
         const { messages } = response.data;
@@ -104,7 +110,7 @@ class GetMessageService {
     const currentTime = new Date();
     const diffInMinutes = (currentTime.getTime() - this.lastMessageTime.getTime()) / (1000 * 60);
     // Возвращаем true, если прошло менее или равно 10 минут
-    return diffInMinutes <= TIMI_OUT_CHAT_REQUEST;
+    return diffInMinutes <= this.timeoutChatRequest;
   };
 
   private handleMessage: IMessageHandler = () => {};
@@ -164,7 +170,7 @@ class GetMessageService {
    */
   private handleError = (): boolean => {
     this.errorCount += 1;
-    if (this.errorCount > MAX_RETRY_ATTEMPTS_MESSAGE_FROM_SERVER) {
+    if (this.errorCount > this.maxRetryAttemptsMessageFromServer) {
       this.errorCount = 0;
       this.stopPolling();
       console.error('Произошла ошибка при получении данных с сервера.');
@@ -179,6 +185,6 @@ class GetMessageService {
   };
 }
 
-const getMessageService = new GetMessageService();
+const getMessageService = new GetMessageService(MAX_RETRY_ATTEMPTS_MESSAGE_FROM_SERVER, MESSAGE_POLLING_INTERVAL, TIMI_OUT_CHAT_REQUEST);
 
 export default getMessageService;
