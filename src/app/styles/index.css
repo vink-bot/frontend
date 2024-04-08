@@ -2,35 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 @supports not (overflow-wrap: anywhere) {
-  .break-anywhere {
-    word-break: break-word;
-  }
+    .break-anywhere {
+        word-break: break-word;
+    }
 }
 
 @supports (overflow-wrap: anywhere) {
-  .break-anywhere {
-    overflow-wrap: anywhere;
-  }
+    .break-anywhere {
+        overflow-wrap: anywhere;
+    }
 }
 
 .animation-paused {
-  animation-play-state: paused;
+    animation-play-state: paused;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: white;
-  border-radius: 5px;
+    background: white;
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(231 231 232);
-  border-radius: 5px;
+    background: rgb(231 231 232);
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(207 239 255);
+    background: rgb(207 239 255);
 }
+
+
+.loading {
+    font-weight: bold;
+    font-size: 30px;
+    display: inline-block;
+    clip-path: inset(0 0 0 3ch); /* изменено */
+    animation: loadingClipPatch 1s steps(4) infinite;
+}
+
+@keyframes loadingClipPatch {
+    to {
+        clip-path: inset(0 0 0 -1ch); /* изменено */
+    }
+}
+
+

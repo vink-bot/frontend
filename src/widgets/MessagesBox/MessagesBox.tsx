@@ -1,17 +1,16 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import usePopup from '../../shared/lib/hooks/usePopup';
 import AppMessage from '../../shared/ui/AppMessage/AppMessage';
 import { useChat } from '../../shared/lib/hooks/useChat';
 import { IMessageRedux } from '../../app/store/slices/chatMessagesSlice';
-/*import useChatConfig from '../../shared/lib/hooks/useChatConfig';*/
+import dotImage from '../../shared/images/icons/dot.svg';
+import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
 
 const MessagesBox = () => {
   const { getMessages: messages } = useChat();
-  // const { chatConfig, onSetPoolingMessage } = useChatConfig();
+  const { chatConfig } = useChatConfig();
   const { isOpen } = usePopup('chatPopup');
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // const { poolingMessage } = chatConfig;
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({
@@ -23,15 +22,6 @@ const MessagesBox = () => {
     if (isOpen) scrollToBottom();
   }, [isOpen, scrollToBottom]);
 
-  // useEffect(() => {
-  //   const lastMessage = messages[messages.length - 1];
-  //   if (lastMessage.type === 'OPERATOR' || lastMessage.type === 'USER') {
-  //     onSetPoolingMessage(true);
-  //   } else {
-  //     onSetPoolingMessage(false);
-  //   }
-  // }, [poolingMessage, messages]);
-
   return (
     <div className="flex-1 overflow-y-scroll bg-gray-50 messages">
       <div className="flex flex-col gap-2 p-3">
@@ -39,6 +29,11 @@ const MessagesBox = () => {
           <AppMessage key={msg.id} message={msg} />
         ))}
         <div id="chatScroll" ref={messagesEndRef}></div>
+        {chatConfig.poolingMessage && (
+          <span className="w-full flex justify-end ">
+            <img className="h-8 w-8 " src={dotImage} alt="dot" />
+          </span>
+        )}
       </div>
     </div>
   );

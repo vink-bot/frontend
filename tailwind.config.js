@@ -67,12 +67,16 @@ export default {
           from: { opacity: 0 },
           to: { opacity: 1 },
         },
+        // loadingClipPatch: {
+        //   to: 'clip-path: inset(0 -1ch 0 0)',
+        // },
       },
       animation: {
         fadeIn: 'fadeIn 1.5s ease forwards',
         fadeInMessage: 'fadeInMessage 0.5s ease forwards',
         heightFadeOut: 'heightFadeOut 0.2s linear forwards',
         heightFadeIn: 'heightFadeIn 0.2s linear forwards',
+        // loadingClipPatch: 'loadingClipPatch 1s steps(4) infinite',
       },
     },
     brightness: {
