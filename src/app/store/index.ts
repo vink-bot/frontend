@@ -2,12 +2,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-
-export type AppDispatch = typeof store.dispatch;
-
 import reducerChatConfig from './slices/chatConfigSlice';
 import reducerChatMessages from './slices/chatMessagesSlice';
 import reducerPopup from './slices/popupSlice';
+
+export type AppDispatch = typeof store.dispatch;
 
 const rootReducer = combineReducers({
   chatMessages: reducerChatMessages,
@@ -18,7 +17,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['chatConfig', 'chatMessages'],
+  whitelist: ['chatConfig', 'chatMessages', 'popup'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
