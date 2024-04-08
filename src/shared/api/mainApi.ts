@@ -34,7 +34,6 @@ class Api {
   }
 
   sendMessage(message: string): Promise<AxiosResponse> {
-    console.log(message);
     return this._request('/gpt', {
       method: 'POST',
       data: { message },
