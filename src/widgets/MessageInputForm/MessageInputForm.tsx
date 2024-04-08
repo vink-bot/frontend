@@ -3,6 +3,7 @@ import { useChat } from '../../shared/lib/hooks/useChat';
 import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea';
 import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig';
+import { cn } from '../../shared/lib/utils/utils';
 
 /**
  * Компонент формы для отправки сообщений в чат.
@@ -12,7 +13,7 @@ import useChatConfig from '../../shared/lib/hooks/useChatConfig';
 const MessageInputForm: React.FC = () => {
   const [message, setMessage] = useState('');
   const { onSetMessage } = useChat();
-  const { onSetFocus, onSetPoolingMessage } = useChatConfig();
+  const { onSetFocus, onSetPoolingMessage, chatConfig } = useChatConfig();
 
   /**
    * Функция для отправки сообщения в чат.
@@ -20,7 +21,6 @@ const MessageInputForm: React.FC = () => {
    */
   const sendMessage = () => {
     if (message.trim() !== '') {
-      //dispatch(sendMessageR(message));
       onSetMessage({ message, type: 'USER' });
       onSetPoolingMessage({ isPooling: true });
       setMessage('');
@@ -57,7 +57,7 @@ const MessageInputForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleMessageSubmit} className="border-t relative flex justify-between items-center px-4 py-2 gap-x-2">
+    <form onSubmit={handleMessageSubmit} className={cn('relative flex items-center justify-between gap-x-2 border-t px-4 py-2', chatConfig.inputFocus && 'h-32 ')}>
       <AppTextArea value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={handleKeyDown} onFocus={handleFocus} />
       <ButtonSendMessage visible={message.trim() !== ''} />
     </form>

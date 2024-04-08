@@ -20,13 +20,13 @@ const ButtonChatOpen = () => {
   };
 
   return (
-    <AppButton size="m" classNameButton={cn('fixed bottom-12 right-8 md:opacity-100 md:visible ', isOpen && 'opacity-0 invisible')} onClick={handleClickButton}>
+    <AppButton size="l" classNameButton={cn('fixed bottom-14 right-16 md:opacity-100 md:visible ', isOpen && 'opacity-0 invisible')} onClick={handleClickButton}>
       {isOpen ? (
-        <img className="min-w-6 h-6" src={CloseIcon} alt="Close" />
+        <img className="h-6 min-w-6" src={CloseIcon} alt="Close" />
       ) : (
         <>
           <PulsatingCircle />
-          <img className="min-w-6 h-6" src={ChatBotIcon} alt="ChatBot" />
+          <img className="h-6 min-w-6" src={ChatBotIcon} alt="ChatBot" />
         </>
       )}
     </AppButton>

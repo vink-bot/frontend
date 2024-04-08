@@ -3,7 +3,7 @@ import ButtonChatClose from '../../features/Buttons/ChatClose/ButtonChatClose';
 
 const WindowTitle = () => {
   return (
-    <div className="header flex items-center justify-between bg-yellow px-3 py-2 rounded-tr-md rounded-tl-md">
+    <div className="flex items-center justify-between rounded-tl-md rounded-tr-md px-3 py-2 header bg-yellow">
       <Title />
       <ButtonChatClose />
     </div>

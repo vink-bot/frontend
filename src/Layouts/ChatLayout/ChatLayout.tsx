@@ -10,7 +10,7 @@ const ChatLayout: FC<IChatLayoutProps> = ({ children, isOpen }) => {
   return (
     <div
       className={cn(
-        'invisible opacity-0 md:max-w-80 w-full min-h-72 h-screen md:max-h-[70dvh] border flex-col rounded-md md:fixed bottom-28 -right-96 bg-white transition-all duration-300',
+        'invisible opacity-0 md:max-w-80 w-full min-h-72 h-screen md:max-h-[60dvh] border flex-col rounded-md md:fixed bottom-32 -right-96 bg-white transition-all duration-300',
         isOpen && 'flex visible opacity-100 right-8'
       )}
     >

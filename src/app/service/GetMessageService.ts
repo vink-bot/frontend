@@ -30,6 +30,8 @@ class GetMessageService {
    */
   startPollingForData = async (): Promise<void> => {
     while (this.isPolling) {
+      // Ждем 3 секунды перед следующим опросом
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       try {
         const response: AxiosResponse = await mainApi.getMessage();
         const { messages } = response.data;
@@ -37,9 +39,6 @@ class GetMessageService {
       } catch (error) {
         if (this.handleError()) break; // прерываем цикл в случае ошибки
       }
-
-      // Ждем 3 секунды перед следующим опросом
-      await new Promise((resolve) => setTimeout(resolve, 3000));
     }
   };
 

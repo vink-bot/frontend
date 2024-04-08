@@ -15,7 +15,7 @@ import ButtonPopularQuestionsToggle from '../../features/Buttons/PopularQuestion
 const PopularQuestionsBox: FC = () => {
   const [activeTab, setActiveTab] = useState<number>(PopularQuestionsCategoryMock[0]?.id || 0);
   const { onSetMessage } = useChat();
-  const { chatConfig } = useChatConfig();
+  const { chatConfig, onSetPoolingMessage } = useChatConfig();
   const { inputFocus } = chatConfig;
 
   // Устанавливаем активную вкладку при монтировании компонента
@@ -35,6 +35,7 @@ const PopularQuestionsBox: FC = () => {
       const selectedQuestion = selectedCategory.questions.find((question) => question.id === questionId);
       if (selectedQuestion) {
         onSetMessage({ message: selectedQuestion.name, type: 'USER' });
+        onSetPoolingMessage({ isPooling: true });
       }
     }
   };
@@ -44,7 +45,7 @@ const PopularQuestionsBox: FC = () => {
       {inputFocus && <ButtonPopularQuestionsToggle />}
 
       <div className={'flex justify-between h-full'}>
-        <div className="whitespace-nowrap h-full w-[160px] flex flex-col  ">
+        <div className="flex h-full flex-col whitespace-nowrap w-[160px]">
           {PopularQuestionsCategoryMock.map((category) => (
             <TabCategory key={category.id} activeTabId={activeTab} id={category.id} name={category.name} clickTab={clickTab} />
           ))}

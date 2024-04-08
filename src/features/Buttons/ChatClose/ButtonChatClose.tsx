@@ -12,7 +12,7 @@ const ButtonChatClose = () => {
   const { onClosePopup: closeChatPopup } = usePopup('chatPopup');
   return (
     <AppButton border="border-none" type="button" color="transparent" onClick={closeChatPopup}>
-      <img className="w-6 h-6" src={CloseIcon} alt="close" />
+      <img className="h-6 w-6" src={CloseIcon} alt="close" />
     </AppButton>
   );
 };

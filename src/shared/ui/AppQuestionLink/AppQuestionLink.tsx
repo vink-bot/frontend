@@ -14,7 +14,7 @@ const MemoizedAppQuestionLink: React.FC<IQuestionLinkProps> = ({ questionName, q
 
   return (
     <span
-      className="cursor-pointer relative block leading-[16px] align-middle text-xs hover:font-semibold ml-2 my-1 pl-[15px] after:block after:top-1/2 after:left-0 after:translate-y-[-50%] after:absolute after:w-[10px] after:h-[10px] after:bg-green-300"
+      className="after:absolute relative after:top-1/2 after:left-0 my-1 ml-2 block after:block cursor-pointer after:bg-green-300 align-middle text-xs leading-[16px] pl-[15px] after:translate-y-[-50%] after:w-[10px] after:h-[10px] hover:font-semibold"
       key={questionId}
       onClick={handleClick}
     >

@@ -33,8 +33,8 @@ const MessagesBox = () => {
   // }, [poolingMessage, messages]);
 
   return (
-    <div className="messages flex-1 overflow-y-scroll bg-gray-50">
-      <div className="p-3 flex flex-col gap-2">
+    <div className="flex-1 overflow-y-scroll bg-gray-50 messages">
+      <div className="flex flex-col gap-2 p-3">
         {messages.map((msg: IMessageRedux) => (
           <AppMessage key={msg.id} message={msg} />
         ))}

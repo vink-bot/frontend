@@ -8,7 +8,7 @@ interface IAppButtonProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   classNameButton?: string;
-  size?: 's' | 'm' | 'full';
+  size?: 's' | 'm' | 'l' | 'full';
   border?: 'rounded' | 'border-none';
   color?: 'yellow' | 'transparent';
 }
@@ -38,6 +38,7 @@ const AppButton: React.FC<IAppButtonProps> = ({ children, type = 'button', onCli
   const sizeList = {
     s: 'w-10 h-10',
     m: 'w-12 h-12',
+    l: 'w-16 h-16',
     full: 'h-full w-full',
   };
 
@@ -45,7 +46,7 @@ const AppButton: React.FC<IAppButtonProps> = ({ children, type = 'button', onCli
    * Типы кнопок.
    */
   const borderList = {
-    'border-none': 'border-none',
+    'border-none': '',
     rounded: 'rounded-full',
   };
 

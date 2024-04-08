@@ -8,8 +8,8 @@ function App() {
     document.title = 'Vink chat';
   }, []);
   return (
-    <main className="h-screen relative">
-      <div className="bg-[url('/img/site.jpg')] bg-contain blur-sm w-screen h-screen brightness-75"></div>
+    <main className="relative h-screen">
+      <div className="bg-[url('/img/site.jpg')] bg-cover blur-sm w-screen h-screen brightness-75 hidden md:inline-flex"></div>
       <ChatPopup />
       <ButtonChatOpen />
     </main>
