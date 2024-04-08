@@ -110,6 +110,9 @@ class GetMessageService {
    */
   private processMessages = (messages: MessageData[]): void => {
     messages.forEach((message: { message: string; date_create: string; user: MessageType }) => {
+      if (message.message == 'Чат окончен.') {
+        this.stopPolling();
+      }
       this.handleMessage({
         message: message.message,
         type: message.user,
