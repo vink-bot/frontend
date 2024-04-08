@@ -7,7 +7,7 @@ import dotImage from '../../shared/images/icons/dot.svg';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig.ts';
 
 const MessagesBox = () => {
-  const { getMessages: messages } = useChat();
+  const { isMessages: messages } = useChat();
   const { chatConfig } = useChatConfig();
   const { isOpen } = usePopup('chatPopup');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -19,6 +19,7 @@ const MessagesBox = () => {
   }, [messages]);
 
   useEffect(() => {
+    console.log(chatConfig.waitMessageFromServer);
     if (isOpen) scrollToBottom();
   }, [isOpen, scrollToBottom]);
 
@@ -29,7 +30,7 @@ const MessagesBox = () => {
           <AppMessage key={msg.id} message={msg} />
         ))}
         <div id="chatScroll" ref={messagesEndRef}></div>
-        {chatConfig.poolingMessage && (
+        {chatConfig.waitMessageFromServer && (
           <span className="w-full flex justify-end ">
             <img className="h-8 w-8 " src={dotImage} alt="dot" />
           </span>

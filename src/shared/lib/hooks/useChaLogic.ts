@@ -5,27 +5,26 @@ import GetMessageService from '../../../app/service/GetMessageService';
 import mainApi from '../../../shared/api/mainApi';
 
 const useChatPopupLogic = () => {
-  const { chatConfig, onSetPoolingMessage } = useChatConfig();
-  const { getMessages: messages, onSetMessage, getTokenChat } = useChat();
+  const { chatConfig, onSetPoolingMessage, onSetWaitMessageFromServer } = useChatConfig();
+  const { onSetMessageFromServer, isTokenChat } = useChat();
   const { poolingMessage } = chatConfig;
 
   //Установка значения токена чата
-  mainApi.setChatToken(getTokenChat);
+  mainApi.setChatToken(isTokenChat);
 
   //Сервис, который будет опрашивать сервер о новых сообщениях
   const messageService = GetMessageService;
-  messageService.setHandleMessage(onSetMessage);
+  messageService.setHandleMessage(onSetMessageFromServer);
   messageService.setHandleStopPooling(onSetPoolingMessage);
+  messageService.setHandleMessageWaitFromServer(onSetWaitMessageFromServer);
 
   useEffect(() => {
-    //const lastMessage = messages[messages.length - 1];
-    console.log('poolingMessage ', poolingMessage);
     if (poolingMessage) {
       // onSetPoolingMessage({ isPooling: true });
       messageService.startPolling();
       messageService.startPollingForData();
     }
-  }, [poolingMessage, messages]);
+  }, [poolingMessage]);
 };
 
 export default useChatPopupLogic;

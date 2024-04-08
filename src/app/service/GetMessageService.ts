@@ -2,15 +2,19 @@ import mainApi from '../../shared/api/mainApi';
 import { AxiosResponse } from 'axios';
 import { MessageType } from '../store/slices/chatMessagesSlice';
 
-interface MessageHandler {
+interface IMessageHandler {
   (messageData: { message: string; type: MessageType }): void;
 }
 
-interface StopPoolingHandler {
+interface IStopPoolingHandler {
   (stopPoolingData: { isPooling: boolean }): void;
 }
 
-interface MessageData {
+interface IHandleSetWaitMessage {
+  (SetWaitMessage: { waitMessageFromServer: boolean }): void;
+}
+
+interface IMessageData {
   message: string;
   date_create: string;
   user: MessageType;
@@ -46,7 +50,6 @@ class GetMessageService {
    * Останавливает пуллинг сообщений
    */
   stopPolling = (): void => {
-    console.log('Stop Pooling');
     if (this.isPolling) {
       this.isPolling = false;
       this.handleStopPooling({ isPooling: false });
@@ -64,7 +67,7 @@ class GetMessageService {
    * Обработчик сообщений
    * @param handleMessage функция добавления сообщений в хранилище Redux
    */
-  setHandleMessage = (handleMessage: MessageHandler): void => {
+  setHandleMessage = (handleMessage: IMessageHandler): void => {
     this.handleMessage = handleMessage;
   };
 
@@ -72,19 +75,30 @@ class GetMessageService {
    * Остановка пуллинга из вне
    * @param handleStopPooling
    */
-  setHandleStopPooling = (handleStopPooling: StopPoolingHandler): void => {
+  setHandleStopPooling = (handleStopPooling: IStopPoolingHandler): void => {
     this.handleStopPooling = handleStopPooling;
   };
 
-  private handleMessage: MessageHandler = () => {};
+  /**
+   * Функция устанавливает значение переменной о том что сообщение получено с севрера
+   * Чтоб не отображались 3 точки в чате
+   * @param handleMessageWait
+   */
+  setHandleMessageWaitFromServer = (handleMessageWait: IHandleSetWaitMessage): void => {
+    this.handleSetWaitMessage = handleMessageWait;
+  };
 
-  private handleStopPooling: StopPoolingHandler = () => {};
+  private handleMessage: IMessageHandler = () => {};
+
+  private handleStopPooling: IStopPoolingHandler = () => {};
+
+  private handleSetWaitMessage: IHandleSetWaitMessage = () => {};
 
   /**
    * Обрабатывает полученные сообщения с сервера
    * @param messages
    */
-  private handleMessages = (messages: MessageData[]): void => {
+  private handleMessages = (messages: IMessageData[]): void => {
     if (messages && messages.length > 0) {
       this.processMessages(messages);
       if (this.shouldStopPolling(messages)) {
@@ -99,7 +113,7 @@ class GetMessageService {
    * Если последнее сообщение отправил GPT или была ошибка, то пуллинг остановится
    * @param messages
    */
-  private shouldStopPolling = (messages: MessageData[]): boolean => {
+  private shouldStopPolling = (messages: IMessageData[]): boolean => {
     const lastMessage = messages[messages.length - 1];
     return lastMessage.user !== 'OPERATOR' && lastMessage.user !== 'USER';
   };
@@ -108,7 +122,7 @@ class GetMessageService {
    * Добавление полученных сообщений, сообщения в хранилище Redux
    * @param messages - сообщения полученные с сервера
    */
-  private processMessages = (messages: MessageData[]): void => {
+  private processMessages = (messages: IMessageData[]): void => {
     messages.forEach((message: { message: string; date_create: string; user: MessageType }) => {
       if (message.message == 'Чат окончен.') {
         this.stopPolling();
@@ -119,6 +133,7 @@ class GetMessageService {
         type: message.user,
       });
     });
+    this.handleSetWaitMessage({ waitMessageFromServer: false });
   };
 
   /**
@@ -135,7 +150,7 @@ class GetMessageService {
         message: 'Произошла ошибка. Попробуйте позднее.',
         type: 'ERROR',
       });
-
+      this.handleSetWaitMessage({ waitMessageFromServer: false });
       return true;
     }
     return false;

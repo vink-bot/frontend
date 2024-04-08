@@ -12,7 +12,7 @@ import { cn } from '../../shared/lib/utils/utils';
  */
 const MessageInputForm: React.FC = () => {
   const [message, setMessage] = useState('');
-  const { onSetMessage } = useChat();
+  const { onSetMessageFromServer } = useChat();
   const { onSetFocus, onSetPoolingMessage, chatConfig } = useChatConfig();
 
   /**
@@ -21,7 +21,7 @@ const MessageInputForm: React.FC = () => {
    */
   const sendMessage = () => {
     if (message.trim() !== '') {
-      onSetMessage({ message, type: 'USER' });
+      onSetMessageFromServer({ message, type: 'USER' });
       onSetPoolingMessage({ isPooling: true });
       setMessage('');
     }

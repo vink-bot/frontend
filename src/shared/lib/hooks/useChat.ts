@@ -2,12 +2,12 @@ import { useAppDispatch } from '../../../app/store';
 import { v4 as uuidv4 } from 'uuid';
 import { getDate } from '../utils/utils';
 import { addMessage, IMessageRedux, MessageType, sendMessageToServer, useGetChatMessages } from '../../../app/store/slices/chatMessagesSlice';
-import { useGetChatToken } from '../../../app/store/slices/chatConfigSlice';
+import { setWaitMessageFromServer, useGetChatToken } from '../../../app/store/slices/chatConfigSlice.ts';
 
 interface Chat {
-  onSetMessage: (params: { message: string; type: MessageType }) => void;
-  getMessages: IMessageRedux[];
-  getTokenChat: string;
+  onSetMessageFromServer: (params: { message: string; type: MessageType }) => void;
+  isMessages: IMessageRedux[];
+  isTokenChat: string;
 }
 
 /**
@@ -39,17 +39,30 @@ export const useChat = (): Chat => {
     dispatch(addMessage(localMessage));
 
     if (type === 'USER') {
-      handleSendToServerMessage(message);
+      sendToServerMessage(message);
+      waitMessage();
     }
   };
 
-  const handleSendToServerMessage = (message: string) => {
+  /**
+   * Отправка сообщения на сервер
+   * @param message
+   */
+  const sendToServerMessage = (message: string) => {
     dispatch(sendMessageToServer(message));
   };
 
+  /**
+   * Ожидание сообщения от сервера
+   * Устанавливается в true если сообщение отправил полльзователь
+   */
+  const waitMessage = () => {
+    dispatch(setWaitMessageFromServer({ waitMessageFromServer: true }));
+  };
+
   return {
-    onSetMessage: handleAddMessageToRedux,
-    getMessages: messages,
-    getTokenChat: tokenChat,
+    onSetMessageFromServer: handleAddMessageToRedux,
+    isMessages: messages,
+    isTokenChat: tokenChat,
   };
 };

@@ -1,4 +1,4 @@
-import { setInputFocus, setPoolingMessage, useGetChatConfig } from '../../../app/store/slices/chatConfigSlice';
+import { setInputFocus, setPoolingMessage, setWaitMessageFromServer, useGetChatConfig } from '../../../app/store/slices/chatConfigSlice';
 import { useAppDispatch } from '../../../app/store';
 
 const useChatConfig = () => {
@@ -13,8 +13,13 @@ const useChatConfig = () => {
     dispatch(setPoolingMessage({ poolingMessage: isPooling }));
   };
 
+  const handleSetWaitMessageFromServer = ({ waitMessageFromServer }: { waitMessageFromServer: boolean }) => {
+    dispatch(setWaitMessageFromServer({ waitMessageFromServer }));
+  };
+
   return {
     chatConfig,
+    onSetWaitMessageFromServer: handleSetWaitMessageFromServer,
     onSetFocus: handleChangeFocus,
     onSetPoolingMessage: handlePoolingMessage,
   };

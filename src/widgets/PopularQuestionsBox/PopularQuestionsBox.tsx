@@ -14,7 +14,7 @@ import ButtonPopularQuestionsToggle from '../../features/Buttons/PopularQuestion
  */
 const PopularQuestionsBox: FC = () => {
   const [activeTab, setActiveTab] = useState<number>(PopularQuestionsCategoryMock[0]?.id || 0);
-  const { onSetMessage } = useChat();
+  const { onSetMessageFromServer } = useChat();
   const { chatConfig, onSetPoolingMessage } = useChatConfig();
   const { inputFocus } = chatConfig;
 
@@ -34,7 +34,7 @@ const PopularQuestionsBox: FC = () => {
     if (selectedCategory) {
       const selectedQuestion = selectedCategory.questions.find((question) => question.id === questionId);
       if (selectedQuestion) {
-        onSetMessage({ message: selectedQuestion.name, type: 'USER' });
+        onSetMessageFromServer({ message: selectedQuestion.name, type: 'USER' });
         onSetPoolingMessage({ isPooling: true });
       }
     }
