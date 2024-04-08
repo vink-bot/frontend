@@ -21,7 +21,7 @@ interface MessageData {
  * Он управляет началом и остановкой опроса, обрабатывает полученные сообщения и ошибки.
  */
 class GetMessageService {
-  private pollingInterval: NodeJS.Timeout | null = null;
+  //private pollingInterval: NodeJS.Timeout | null = null;
   private isPolling: boolean = false;
   private errorCount: number = 0;
 
@@ -29,16 +29,17 @@ class GetMessageService {
    * Проверяет значение переменной pollingInterval и запускает процесс для получения данных с сервера
    */
   startPollingForData = async (): Promise<void> => {
-    if (this.isPolling) {
-      this.pollingInterval = setInterval(async () => {
-        try {
-          const response: AxiosResponse = await mainApi.getMessage();
-          const { messages } = response.data;
-          this.handleMessages(messages);
-        } catch (error) {
-          this.handleError();
-        }
-      }, 3000);
+    while (this.isPolling) {
+      try {
+        const response: AxiosResponse = await mainApi.getMessage();
+        const { messages } = response.data;
+        this.handleMessages(messages);
+      } catch (error) {
+        if (this.handleError()) break; // прерываем цикл в случае ошибки
+      }
+
+      // Ждем 3 секунды перед следующим опросом
+      await new Promise((resolve) => setTimeout(resolve, 3000));
     }
   };
 
@@ -47,8 +48,7 @@ class GetMessageService {
    */
   stopPolling = (): void => {
     console.log('Stop Pooling');
-    if (this.pollingInterval) {
-      clearInterval(this.pollingInterval);
+    if (this.isPolling) {
       this.isPolling = false;
       this.handleStopPooling({ isPooling: false });
     }
@@ -122,16 +122,20 @@ class GetMessageService {
    * Обработчик ошибок при получении данных с сервера
    * Вызывается из функции `startPollingForData`
    */
-  private handleError = (): void => {
+  private handleError = (): boolean => {
     this.errorCount += 1;
-    if (this.errorCount > 5) {
+    if (this.errorCount > 3) {
+      this.errorCount = 0;
       this.stopPolling();
       console.error('Произошла ошибка при получении данных с сервера.');
       this.handleMessage({
         message: 'Произошла ошибка. Попробуйте позднее.',
         type: 'ERROR',
       });
+
+      return true;
     }
+    return false;
   };
 }
 
