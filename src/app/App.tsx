@@ -9,6 +9,7 @@ function App() {
   }, []);
   return (
     <main className="h-screen relative">
+      <div className="bg-[url('/img/site.jpg')] bg-contain blur-sm w-screen h-screen brightness-75"></div>
       <ChatPopup />
       <ButtonChatOpen />
     </main>
