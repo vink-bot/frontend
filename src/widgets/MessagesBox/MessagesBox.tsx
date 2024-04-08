@@ -19,7 +19,6 @@ const MessagesBox = () => {
   }, [messages]);
 
   useEffect(() => {
-    console.log(chatConfig.waitMessageFromServer);
     if (isOpen) scrollToBottom();
   }, [isOpen, scrollToBottom]);
 

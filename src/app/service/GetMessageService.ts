@@ -1,6 +1,7 @@
 import mainApi from '../../shared/api/mainApi';
 import { AxiosResponse } from 'axios';
 import { MessageType } from '../store/slices/chatMessagesSlice';
+import { MAX_RETRY_ATTEMPTS_MESSAGE_FROM_SERVER, MESSAGE_POLLING_INTERVAL, TIMI_OUT_CHAT_REQUEST } from '../../shared/lib/const/const.ts';
 
 interface IMessageHandler {
   (messageData: { message: string; type: MessageType }): void;
@@ -36,12 +37,11 @@ class GetMessageService {
   startPollingForData = async (): Promise<void> => {
     while (this.isPolling) {
       if (!this.isChatActive()) {
-        console.log('Чат не активен!!');
         this.stopPolling();
         break;
       }
       // Ждем 3 секунды перед следующим опросом
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, MESSAGE_POLLING_INTERVAL * 1000));
       try {
         const response: AxiosResponse = await mainApi.getMessage();
         const { messages } = response.data;
@@ -104,7 +104,7 @@ class GetMessageService {
     const currentTime = new Date();
     const diffInMinutes = (currentTime.getTime() - this.lastMessageTime.getTime()) / (1000 * 60);
     // Возвращаем true, если прошло менее или равно 10 минут
-    return diffInMinutes <= 3;
+    return diffInMinutes <= TIMI_OUT_CHAT_REQUEST;
   };
 
   private handleMessage: IMessageHandler = () => {};
@@ -164,7 +164,7 @@ class GetMessageService {
    */
   private handleError = (): boolean => {
     this.errorCount += 1;
-    if (this.errorCount > 3) {
+    if (this.errorCount > MAX_RETRY_ATTEMPTS_MESSAGE_FROM_SERVER) {
       this.errorCount = 0;
       this.stopPolling();
       console.error('Произошла ошибка при получении данных с сервера.');

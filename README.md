@@ -1,30 +1,91 @@
-# React + TypeScript + Vite
+# Хакатон от Яндекс и Vink.RU  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Разработать и внедрить чат-бота с технологией GPT на сайт компании для предоставления консультаций по материалам и оборудованию, а также оказания помощи клиентам 24/
 
-Currently, two official plugins are available:
+## Технологии:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Фронтенд:
 
-## Expanding the ESLint configuration
+* React: 18.2.0
+* React-dom: 18.2.0
+* Redux toolkit: 2.2.2,
+* Redux Persist: 7.51.0,
+* Typescript: 5.2.2,
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+### Сборка и инструменты:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
+- React Scripts, [Webpack](https://webpack.js.org/): Для сборки и управления модулями.
+- [Sass и Sass Loader](https://sass-scss.ru/): Для работы с CSS и препроцессором Sass.
+- [Prettier](https://prettier.io/), [ESLint](https://eslint.org/): Инструменты для форматирования кода.
+
+
+
+## Команда:
+
+Product manager – Сергей Кириллов (ТГ [@kvbaginskii](https://t.me/Exclussivei))
+
+Project manager – Лена Вертинская (ТГ [@Juliana_jull](https://t.me/lena_vert))
+
+### Frontend:
+
+Типсин Дмитрий (ТГ [@Chia_Rio_Ru](https://t.me/Chia_Rio_Ru), GitHub [TIPDMR](https://github.com/TIPDMR))
+
+
+### Backend:
+
+Александр Мальшаков (ТГ [@hutjinator](https://t.me/amalshakov), GitHub [hutji](https://github.com/hutji)) - Lead
+
+Олег Чужмаров (ТГ [@sabjbrus](https://t.me/chtiger4), GitHub [SabjBrus](https://github.com/SabjBrus))
+
+
+### Дизайнеры:
+
+Фортунатова Екатерина (ТГ [@by42naa](https://t.me/by42naa)) - Lead
+
+Торженова Юлия (ТГ [@Yuliya_Torzhenova](https://t.me/Yuliya_Torzhenova)]
+
+Агафонова Светлана (ТГ [@agafonova_ss](https://t.me/agafonova_ss))
+
+
+### Бизнес-аналитики:
+
+Павлова Мария (ТГ [@MariaPavlova111](https://t.me/MariaPavlova111)) - Lead
+
+Бублик Михаил (ТГ [@Boymit](https://t.me/Boymit))
+
+### Системные аналитики:
+
+Сканави Павел (ТГ [@Reds_on_tour](https://t.me/Reds_on_tour)) - Lead
+
+Краснов Дмитрий (ТГ [@DmAKrasnov](https://t.me/DmAKrasnov))
+
+Павлюченко Елена (ТГ [@elprianik](https://t.me/elprianik))
+
+## Развёртывание проекта
+
+- Клонируйте репозиторий через командную строку:
+
+```
+git clone git@github.com:hackathon-ambassadors-yandex-pr/ambassadors_frontend.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Перейдите в локальную папку с проектом
+- Установите зависимости командой:
+
+```
+npm i
+```
+
+- Запустите приложение:
+
+```
+npm run dev
+```
+
+## Логин и пароль для входа
+
+
+### Логин: su@su.su
+
+### Пароль: SuperUser

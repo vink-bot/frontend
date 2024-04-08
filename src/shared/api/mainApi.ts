@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { MAIN_API_URI } from '../lib/const/api';
+import { MAIN_API_URI } from '../lib/const/const.ts';
 
 interface ApiConfig {
   baseUrl: string;
