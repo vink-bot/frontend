@@ -112,6 +112,7 @@ class GetMessageService {
     messages.forEach((message: { message: string; date_create: string; user: MessageType }) => {
       if (message.message == 'Чат окончен.') {
         this.stopPolling();
+        return;
       }
       this.handleMessage({
         message: message.message,
