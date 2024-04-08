@@ -18,15 +18,17 @@
 
 ## Видео : [=> Link Video <=](https://disk.yandex.ru/i/oFe1ww9htkyEiA) 
 
-## Технологии:
-
-### Фронтенд:
+## Frontend:
 
 * ✅ React: 18.2.0
 * ✅ Typescript: 5.2.2,
 * ✅ Redux toolkit: 2.2.2,
 * ✅ Redux Persist: 7.51.0,
 * ✅ TailwindCSS: 3.4.1,
+
+## Backend:
+
+#### Ссылка на бэкенд репозиторий: [=> Link Repositories <=](https://github.com/vink-bot/backend)  
 
 ### Сборка и инструменты:
 
