@@ -1,4 +1,4 @@
-import TabCategory from './TabCategory/TabCategory.tsx';
-import TabItem from './TabItem/TabItem.tsx';
+import TabCategory from './TabCategory/TabCategory';
+import TabItem from './TabItem/TabItem';
 
 export { TabCategory, TabItem };

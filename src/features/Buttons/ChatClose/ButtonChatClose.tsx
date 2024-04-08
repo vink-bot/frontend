@@ -1,5 +1,5 @@
-import usePopup from '../../../shared/lib/hooks/usePopup.ts';
-import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
+import usePopup from '../../../shared/lib/hooks/usePopup';
+import AppButton from '../../../shared/ui/AppButton/AppButton';
 
 import CloseIcon from '../../../shared/images/icons/close.svg';
 

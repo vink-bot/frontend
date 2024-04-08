@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getDate } from '../../../shared/lib/utils/utils.ts';
+import { getDate } from '../../../shared/lib/utils/utils';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import store from '../index.ts';
-import MainApi from '../../../shared/api/mainApi.ts';
+import store from '../index';
+import MainApi from '../../../shared/api/mainApi';
 
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

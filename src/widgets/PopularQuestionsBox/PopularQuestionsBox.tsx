@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from 'react';
-import { useChat } from '../../shared/lib/hooks/useChat.ts';
+import { useChat } from '../../shared/lib/hooks/useChat';
 import { TabCategory, TabItem } from '../../entities/Tabs';
 import AppQuestionLink from '../../shared/ui/AppQuestionLink/AppQuestionLink';
-import { cn } from '../../shared/lib/utils/utils.ts';
+import { cn } from '../../shared/lib/utils/utils';
 import { PopularQuestionsCategoryMock } from './mock';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig';
-import ButtonPopularQuestionsToggle from '../../features/Buttons/PopularQuestionsToggle/ButtonPopularQuestionsToggle.tsx';
+import ButtonPopularQuestionsToggle from '../../features/Buttons/PopularQuestionsToggle/ButtonPopularQuestionsToggle';
 
 /**
  * Блок с популярными вопросами пользователей

@@ -5,9 +5,9 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 
 export type AppDispatch = typeof store.dispatch;
 
-import reducerChatConfig from './slices/chatConfigSlice.ts';
-import reducerChatMessages from './slices/chatMessagesSlice.ts';
-import reducerPopup from './slices/popupSlice.ts';
+import reducerChatConfig from './slices/chatConfigSlice';
+import reducerChatMessages from './slices/chatMessagesSlice';
+import reducerPopup from './slices/popupSlice';
 
 const rootReducer = combineReducers({
   chatMessages: reducerChatMessages,

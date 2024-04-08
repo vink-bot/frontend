@@ -1,5 +1,5 @@
-import { cn } from '../../../shared/lib/utils/utils.ts';
-import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
+import { cn } from '../../../shared/lib/utils/utils';
+import AppButton from '../../../shared/ui/AppButton/AppButton';
 
 import SendIcon from '../../../shared/images/icons/send.svg';
 

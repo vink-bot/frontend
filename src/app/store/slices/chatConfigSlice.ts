@@ -1,8 +1,8 @@
-import store from '../index.ts';
+import store from '../index';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { getDate } from '../../../shared/lib/utils/utils.ts';
+import { getDate } from '../../../shared/lib/utils/utils';
 
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

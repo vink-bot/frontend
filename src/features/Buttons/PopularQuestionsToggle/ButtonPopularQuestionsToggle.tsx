@@ -1,6 +1,6 @@
-import AppButton from '../../../shared/ui/AppButton/AppButton.tsx';
+import AppButton from '../../../shared/ui/AppButton/AppButton';
 import React from 'react';
-import useChatConfig from '../../../shared/lib/hooks/useChatConfig.ts';
+import useChatConfig from '../../../shared/lib/hooks/useChatConfig';
 
 const ButtonPopularQuestionsToggle: React.FC = () => {
   const { onSetFocus } = useChatConfig();

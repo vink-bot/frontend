@@ -1,8 +1,8 @@
 import { useAppDispatch } from '../../../app/store';
 import { v4 as uuidv4 } from 'uuid';
-import { getDate } from '../utils/utils.ts';
-import { addMessage, IMessageRedux, MessageType, useGetChatMessages } from '../../../app/store/slices/chatMessagesSlice.ts';
-import { useGetChatToken } from '../../../app/store/slices/chatConfigSlice.ts';
+import { getDate } from '../utils/utils';
+import { addMessage, IMessageRedux, MessageType, useGetChatMessages } from '../../../app/store/slices/chatMessagesSlice';
+import { useGetChatToken } from '../../../app/store/slices/chatConfigSlice';
 
 interface Chat {
   onSetMessage: (params: { message: string; type: MessageType }) => void;

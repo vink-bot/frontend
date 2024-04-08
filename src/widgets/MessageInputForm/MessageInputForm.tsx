@@ -4,7 +4,7 @@ import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea';
 import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig';
 import { useAppDispatch } from '../../app/store';
-import { sendMessageR } from '../../app/store/slices/chatMessagesSlice.ts';
+import { sendMessageR } from '../../app/store/slices/chatMessagesSlice';
 
 /**
  * Компонент формы для отправки сообщений в чат.

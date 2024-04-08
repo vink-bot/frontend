@@ -1,6 +1,6 @@
 import React from 'react';
-import { cn } from '../../lib/utils/utils.ts';
-import { IMessageRedux } from '../../../app/store/slices/chatMessagesSlice.ts';
+import { cn } from '../../lib/utils/utils';
+import { IMessageRedux } from '../../../app/store/slices/chatMessagesSlice';
 
 const MemoizedAppMessage: React.FC<{ message: IMessageRedux }> = ({ message }) => {
   const isMyMsg = message.type === 'USER';

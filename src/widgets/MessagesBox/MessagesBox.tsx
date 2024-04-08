@@ -1,8 +1,8 @@
 import { useEffect, useRef, useCallback } from 'react';
-import usePopup from '../../shared/lib/hooks/usePopup.ts';
-import AppMessage from '../../shared/ui/AppMessage/AppMessage.tsx';
-import { useChat } from '../../shared/lib/hooks/useChat.ts';
-import { IMessageRedux } from '../../app/store/slices/chatMessagesSlice.ts';
+import usePopup from '../../shared/lib/hooks/usePopup';
+import AppMessage from '../../shared/ui/AppMessage/AppMessage';
+import { useChat } from '../../shared/lib/hooks/useChat';
+import { IMessageRedux } from '../../app/store/slices/chatMessagesSlice';
 /*import useChatConfig from '../../shared/lib/hooks/useChatConfig';*/
 
 const MessagesBox = () => {

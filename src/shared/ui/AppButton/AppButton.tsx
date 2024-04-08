@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { cn } from '../../lib/utils/utils.ts';
+import { cn } from '../../lib/utils/utils';
 
 interface IAppButtonProps {
   children?: ReactNode;

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { MAIN_API_URI } from '../lib/const/api.ts';
+import { MAIN_API_URI } from '../lib/const/api';
 
 interface ApiConfig {
   baseUrl: string;
@@ -49,7 +49,6 @@ class Api {
   }
 
   private _request(url: string, config: AxiosRequestConfig): Promise<AxiosResponse> {
-    // Добавляем токен к заголовкам запроса, если он установлен
     if (this._chatToken) {
       if (!config.headers) {
         config.headers = {};
