@@ -1,10 +1,8 @@
-import React, { FormEvent, FocusEvent, useState } from 'react';
+import React, { FocusEvent, FormEvent, useState } from 'react';
 import { useChat } from '../../shared/lib/hooks/useChat';
 import AppTextArea from '../../shared/ui/AppTextArea/AppTextArea';
 import ButtonSendMessage from '../../features/Buttons/SendMessage/ButtonSendMessage';
 import useChatConfig from '../../shared/lib/hooks/useChatConfig';
-import { useAppDispatch } from '../../app/store';
-import { sendMessageR } from '../../app/store/slices/chatMessagesSlice';
 
 /**
  * Компонент формы для отправки сообщений в чат.
@@ -12,7 +10,6 @@ import { sendMessageR } from '../../app/store/slices/chatMessagesSlice';
  * @returns JSX элемент формы для отправки сообщений.
  */
 const MessageInputForm: React.FC = () => {
-  const dispatch = useAppDispatch();
   const [message, setMessage] = useState('');
   const { onSetMessage } = useChat();
   const { onSetFocus, onSetPoolingMessage } = useChatConfig();
@@ -23,7 +20,7 @@ const MessageInputForm: React.FC = () => {
    */
   const sendMessage = () => {
     if (message.trim() !== '') {
-      dispatch(sendMessageR(message));
+      //dispatch(sendMessageR(message));
       onSetMessage({ message, type: 'USER' });
       onSetPoolingMessage({ isPooling: true });
       setMessage('');

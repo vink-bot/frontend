@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../../app/store';
 import { v4 as uuidv4 } from 'uuid';
 import { getDate } from '../utils/utils';
-import { addMessage, IMessageRedux, MessageType, useGetChatMessages } from '../../../app/store/slices/chatMessagesSlice';
+import { addMessage, IMessageRedux, MessageType, sendMessageToServer, useGetChatMessages } from '../../../app/store/slices/chatMessagesSlice';
 import { useGetChatToken } from '../../../app/store/slices/chatConfigSlice';
 
 interface Chat {
@@ -37,6 +37,14 @@ export const useChat = (): Chat => {
     };
 
     dispatch(addMessage(localMessage));
+
+    if (type === 'USER') {
+      handleSendToServerMessage(message);
+    }
+  };
+
+  const handleSendToServerMessage = (message: string) => {
+    dispatch(sendMessageToServer(message));
   };
 
   return {

@@ -75,6 +75,9 @@ export default {
         heightFadeIn: 'heightFadeIn 0.2s linear forwards',
       },
     },
+    brightness: {
+      25: '.25',
+    },
   },
   plugins: [],
 };

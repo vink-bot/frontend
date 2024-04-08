@@ -8,7 +8,7 @@ import MainApi from '../../../shared/api/mainApi';
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const sendMessageR = createAsyncThunk('send/sendMessage', async (message: string) => {
+export const sendMessageToServer = createAsyncThunk('send/sendMessage', async (message: string) => {
   const response = await MainApi.sendMessage(message);
   return response.data;
 });
@@ -60,9 +60,9 @@ const chatMessagesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(sendMessageR.pending.type, () => {});
-    builder.addCase(sendMessageR.fulfilled.type, () => {});
-    builder.addCase(sendMessageR.rejected.type, () => {});
+    builder.addCase(sendMessageToServer.pending.type, () => {});
+    builder.addCase(sendMessageToServer.fulfilled.type, () => {});
+    builder.addCase(sendMessageToServer.rejected.type, () => {});
   },
 });
 //Экспорт селекторов
