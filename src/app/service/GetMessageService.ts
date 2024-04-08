@@ -25,15 +25,21 @@ interface IMessageData {
  * Он управляет началом и остановкой опроса, обрабатывает полученные сообщения и ошибки.
  */
 class GetMessageService {
-  //private pollingInterval: NodeJS.Timeout | null = null;
   private isPolling: boolean = false;
   private errorCount: number = 0;
+  // Переменная для хранения времени последнего сообщения
+  private lastMessageTime: Date | null = null;
 
   /**
    * Проверяет значение переменной pollingInterval и запускает процесс для получения данных с сервера
    */
   startPollingForData = async (): Promise<void> => {
     while (this.isPolling) {
+      if (!this.isChatActive()) {
+        console.log('Чат не активен!!');
+        this.stopPolling();
+        break;
+      }
       // Ждем 3 секунды перед следующим опросом
       await new Promise((resolve) => setTimeout(resolve, 3000));
       try {
@@ -53,6 +59,7 @@ class GetMessageService {
     if (this.isPolling) {
       this.isPolling = false;
       this.handleStopPooling({ isPooling: false });
+      this.handleSetWaitMessage({ waitMessageFromServer: false });
     }
   };
 
@@ -60,6 +67,7 @@ class GetMessageService {
    * Начинает процесс пуллинга сообщений с сервера
    */
   startPolling = (): void => {
+    this.lastMessageTime = new Date();
     this.isPolling = true;
   };
 
@@ -88,6 +96,17 @@ class GetMessageService {
     this.handleSetWaitMessage = handleMessageWait;
   };
 
+  private isChatActive = (): boolean => {
+    if (!this.lastMessageTime) {
+      return false; // Нет сообщений, чат не активен
+    }
+
+    const currentTime = new Date();
+    const diffInMinutes = (currentTime.getTime() - this.lastMessageTime.getTime()) / (1000 * 60);
+    // Возвращаем true, если прошло менее или равно 10 минут
+    return diffInMinutes <= 3;
+  };
+
   private handleMessage: IMessageHandler = () => {};
 
   private handleStopPooling: IStopPoolingHandler = () => {};
@@ -100,6 +119,8 @@ class GetMessageService {
    */
   private handleMessages = (messages: IMessageData[]): void => {
     if (messages && messages.length > 0) {
+      // Обновляем время последнего сообщения
+      this.lastMessageTime = new Date();
       this.processMessages(messages);
       if (this.shouldStopPolling(messages)) {
         this.stopPolling();
@@ -133,6 +154,7 @@ class GetMessageService {
         type: message.user,
       });
     });
+    //Сообщение получено
     this.handleSetWaitMessage({ waitMessageFromServer: false });
   };
 
@@ -150,7 +172,7 @@ class GetMessageService {
         message: 'Произошла ошибка. Попробуйте позднее.',
         type: 'ERROR',
       });
-      this.handleSetWaitMessage({ waitMessageFromServer: false });
+
       return true;
     }
     return false;

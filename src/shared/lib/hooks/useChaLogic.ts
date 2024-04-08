@@ -20,7 +20,6 @@ const useChatPopupLogic = () => {
 
   useEffect(() => {
     if (poolingMessage) {
-      // onSetPoolingMessage({ isPooling: true });
       messageService.startPolling();
       messageService.startPollingForData();
     }
