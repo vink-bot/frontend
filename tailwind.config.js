@@ -4,43 +4,15 @@ const colors = {
   current: 'currentColor',
   black: '#000',
   white: '#fff',
-  blue: {
-    DEFAULT: '#1da1f2',
-    dark: '#2a90e9',
-    light: '#87ceeb',
-  },
   gray: {
-    darkest: '#37383a',
-    darker: '#4a4a4a',
-    dark: '#666',
     DEFAULT: '#999',
-    light: '#ccc',
-    lighter: '#e8e8e8',
     lightest: '#f0f0f0',
-  },
-  green: {
-    DEFAULT: '#41b883',
-    light: '#b6ed8b',
-  },
-  red: {
-    DEFAULT: '#ff5268',
   },
   yellow: {
     DEFAULT: '#ffd132',
-    light: '#ffeaa3',
   },
   orange: {
     DEFAULT: '#ff9a19',
-    light: '#ffbf00',
-  },
-  indigo: {
-    DEFAULT: '#5897fb',
-  },
-  pink: {
-    DEFAULT: '#ff9c7d',
-  },
-  purple: {
-    DEFAULT: '#dbedfb',
   },
 };
 
@@ -67,16 +39,12 @@ export default {
           from: { opacity: 0 },
           to: { opacity: 1 },
         },
-        // loadingClipPatch: {
-        //   to: 'clip-path: inset(0 -1ch 0 0)',
-        // },
       },
       animation: {
         fadeIn: 'fadeIn 1.5s ease forwards',
         fadeInMessage: 'fadeInMessage 0.5s ease forwards',
         heightFadeOut: 'heightFadeOut 0.2s linear forwards',
         heightFadeIn: 'heightFadeIn 0.2s linear forwards',
-        // loadingClipPatch: 'loadingClipPatch 1s steps(4) infinite',
       },
     },
     brightness: {
