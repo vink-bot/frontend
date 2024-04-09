@@ -14,9 +14,11 @@
 
 - **Адаптивность:** Чат адаптирован для работы на различных устройствах, включая десктопы, планшеты и мобильные телефоны.
 
-## Демо: [=> Link Site <=](http://hackathon.zapto.org/) 
+## Ссылки:
 
-## Видео : [=> Link Video <=](https://disk.yandex.ru/i/oFe1ww9htkyEiA) 
+### Демо: [=> Link Site <=](http://hackathon.zapto.org/) 
+
+### Видео : [=> Link Video <=](https://disk.yandex.ru/i/oFe1ww9htkyEiA) 
 
 ## Frontend:
 
@@ -28,9 +30,9 @@
 
 ## Backend:
 
-#### Ссылка на бэкенд репозиторий: [=> Link Repositories <=](https://github.com/vink-bot/backend)  
+### Ссылка на бэкенд репозиторий: [=> Link Repositories <=](https://github.com/vink-bot/backend)  
 
-### Сборка и инструменты:
+## Сборка и инструменты:
 
 - React Scripts, [Webpack](https://webpack.js.org/): Для сборки и управления модулями.
 - [TailwindCSS](https://tailwindcss.com/):  CSS-фреймворк.
