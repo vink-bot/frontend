@@ -4,7 +4,7 @@ import PopularQuestionsBox from '../../widgets/PopularQuestionsBox/PopularQuesti
 import MessagesBox from '../../widgets/MessagesBox/MessagesBox';
 import Footer from '../../widgets/Footer/Footer';
 import useChatPopupLogic from '../../shared/lib/hooks/useChaLogic.ts';
-import ChatLayout from '../../Layouts/ChatLayout/ChatLayout.tsx';
+import ChatLayout from '../../layouts/ChatLayout/ChatLayout.tsx';
 
 const ChatPopup = () => {
   const { isOpen } = usePopup('chatPopup');
