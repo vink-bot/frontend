@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
 import reducerChatConfig from './slices/chatConfigSlice';
@@ -7,6 +6,7 @@ import reducerChatMessages from './slices/chatMessagesSlice';
 import reducerPopup from './slices/popupSlice';
 
 export type AppDispatch = typeof store.dispatch;
+
 
 const rootReducer = combineReducers({
   chatMessages: reducerChatMessages,
@@ -32,6 +32,6 @@ const store = configureStore({
     }).concat([]),
 });
 
+
 export const persistor = persistStore(store);
-export const useAppDispatch: () => AppDispatch = useDispatch;
 export default store;

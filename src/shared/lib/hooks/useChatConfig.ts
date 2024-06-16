@@ -1,5 +1,5 @@
 import { setInputFocus, setPoolingMessage, setWaitMessageFromServer, useGetChatConfig } from '../../../app/store/slices/chatConfigSlice';
-import { useAppDispatch } from '../../../app/store';
+import { useAppDispatch } from '../../../app/store/store.hooks.ts';
 
 const useChatConfig = () => {
   const dispatch = useAppDispatch();

@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import store from '../index';
-export type RootState = ReturnType<typeof store.getState>;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { useAppSelector } from '../store.hooks.ts';
+
 
 // Интерфейс для описания типов всплывающего окна
 export type PopupType = 'chatPopup';

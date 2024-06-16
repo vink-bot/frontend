@@ -1,12 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getDate } from '../../../shared/lib/utils/utils';
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import store from '../index';
 import MainApi from '../../../shared/api/mainApi';
+import { useAppSelector } from '../store.hooks.ts';
 
-export type RootState = ReturnType<typeof store.getState>;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 
 export const sendMessageToServer = createAsyncThunk('send/sendMessage', async (message: string) => {
   const response = await MainApi.sendMessage(message);
@@ -60,9 +58,12 @@ const chatMessagesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(sendMessageToServer.pending.type, () => {});
-    builder.addCase(sendMessageToServer.fulfilled.type, () => {});
-    builder.addCase(sendMessageToServer.rejected.type, () => {});
+    builder.addCase(sendMessageToServer.pending.type, () => {
+    });
+    builder.addCase(sendMessageToServer.fulfilled.type, () => {
+    });
+    builder.addCase(sendMessageToServer.rejected.type, () => {
+    });
   },
 });
 //Экспорт селекторов
