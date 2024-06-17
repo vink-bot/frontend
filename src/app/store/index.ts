@@ -5,7 +5,6 @@ import reducerChatConfig from './slices/chatConfigSlice';
 import reducerChatMessages from './slices/chatMessagesSlice';
 import reducerPopup from './slices/popupSlice';
 
-export type AppDispatch = typeof store.dispatch;
 
 
 const rootReducer = combineReducers({
